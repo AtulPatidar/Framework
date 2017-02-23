@@ -22,7 +22,7 @@ public class CoreTestCase extends Assert {
 
     @DataProvider(name = "generic")
     public static Object[][] getData() {
-        BrowserTypes[][] browserTypes = new BrowserTypes[BrowserTypes.values().length][];
+        BrowserTypes[][] browserTypes = new BrowserTypes[BrowserTypes.values().length][1];
         int i = 0;
         for (BrowserTypes type : BrowserTypes.values()) {
             browserTypes[i][0] = type;
