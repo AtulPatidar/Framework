@@ -1,15 +1,9 @@
-package com.framework.common;
+package com.xpanxion.common;
 
-import com.framework.browsers.*;
-import com.framework.common.BrowserTypes;
-import com.framework.common.ConfigProperties;
-import org.openqa.selenium.Capabilities;
+import com.xpanxion.browsers.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 
-import java.net.URL;
 import java.util.HashMap;
 
 public abstract class WebDriverBase {

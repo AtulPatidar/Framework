@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.framework.common;
+package com.xpanxion.common;
 
 /**
  * @author mkatta

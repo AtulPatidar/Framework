@@ -1,4 +1,4 @@
-package com.framework.browsers;
+package com.xpanxion.browsers;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;

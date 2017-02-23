@@ -1,11 +1,11 @@
-package com.framework.browsers;
-
-import java.net.URL;
+package com.xpanxion.browsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.URL;
 
 public class CloudDeviceBrowser extends DriverFactory{
 	

@@ -1,12 +1,12 @@
-package com.framework.browsers;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.xpanxion.browsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResolutionBasedDriver extends DriverFactory{
 	

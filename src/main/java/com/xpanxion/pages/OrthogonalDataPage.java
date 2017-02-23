@@ -1,11 +1,12 @@
 package com.xpanxion.pages;
 
 import com.xpanxion.utils.WaitUtils;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class OrthogonalDataPage {
 

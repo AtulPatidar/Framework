@@ -1,4 +1,4 @@
-package com.framework.common;
+package com.xpanxion.common;
 
 
 public class ConfigProperties {
