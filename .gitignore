@@ -1,4 +1,9 @@
 target/
 settings.xml
 nbactions.xml
+.classpath
+.project
+.settings/*
+*log4j-application.log
+test-output/*
 
