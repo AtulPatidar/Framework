@@ -1,37 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xpanxion.base;
 
+import com.google.common.base.Predicate;
 import com.xpanxion.interfaces.WebInterface;
 import java.io.File;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.server.DriverProvider;
-import org.openqa.selenium.support.ui.FluentWait;
-import com.google.common.base.Predicate;
-import com.xpanxion.core.Configuration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.xpanxion.core.Configuration;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  *
@@ -39,14 +26,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class WebPageBase implements WebInterface {
 
-	protected WebDriver driver;
-	
-	
-    public WebPageBase(WebDriver driver) {
-		this.driver = driver;
-	}
+    protected WebDriver driver;
 
-	@Override
+    public WebPageBase() {
+        this.driver = DriverFactory.getDriverInstance();
+    }
+
+    @Override
     public WebElement waitForElement(By by) {
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
         wait.withTimeout(10, TimeUnit.SECONDS)
@@ -73,9 +59,9 @@ public class WebPageBase implements WebInterface {
         });
         return driver.findElements(by);
     }
-    
-    public List<WebElement> waitForElementsBy(WebElement element, By by){
-    	return null;
+
+    public List<WebElement> waitForElementsBy(WebElement element, By by) {
+        return null;
     }
 
     @Override
@@ -115,15 +101,10 @@ public class WebPageBase implements WebInterface {
 
     @Override
     public boolean hasNoElementAsExpected(By by) {
-       WebElement element;
-        try {
-            element = new WebDriverWait(driver, 5).until(ExpectedConditions
-                    .presenceOfElementLocated(by));
-        } catch (TimeoutException te) {
-
-            return true;
-        }
-        return Boolean.valueOf(element == null || !element.isDisplayed());
+        WebElement element;
+        element = new WebDriverWait(driver, 5).until(ExpectedConditions
+                .presenceOfElementLocated(by));
+        return element == null || !element.isDisplayed();
     }
 
     @Override
