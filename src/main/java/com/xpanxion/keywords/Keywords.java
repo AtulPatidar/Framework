@@ -12,16 +12,16 @@ public class Keywords {
 
     public List<Employee> getEmployeeDetails(WebDriver driver, OrthogonalDataPage page) {
         List<Employee> employees = new ArrayList<>();
-        while (!page.isNextDisabled(driver)) {
-            List<WebElement> rowElements = page.getRows(driver);
+        while (!page.isNextDisabled()) {
+            List<WebElement> rowElements = page.getRows();
             for (WebElement element : rowElements) {
                 List<WebElement> columnElement = page.getColumns(element);
                 Employee employee = getEmployeeRecord(columnElement);
                 employees.add(employee);
             }
-            page = page.clickNext(driver);
+            page = page.clickNext();
         }
-        List<WebElement> rowElements = page.getRows(driver);
+        List<WebElement> rowElements = page.getRows();
         for (WebElement element : rowElements) {
             List<WebElement> columnElement = page.getColumns(element);
             Employee employee = getEmployeeRecord(columnElement);

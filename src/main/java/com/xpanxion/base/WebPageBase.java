@@ -37,11 +37,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author AE08464
  */
-public class WebPageBase extends WebDriverBase implements WebInterface {
+public class WebPageBase implements WebInterface {
 
-    @Override
+	protected WebDriver driver;
+	
+	
+    public WebPageBase(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	@Override
     public WebElement waitForElement(By by) {
-        FluentWait<WebDriver> wait = new FluentWait<>(getDriverInstance());
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
         wait.withTimeout(10, TimeUnit.SECONDS)
                 .pollingEvery(2, TimeUnit.SECONDS)
                 .until(new Predicate<WebDriver>() {
@@ -50,12 +57,12 @@ public class WebPageBase extends WebDriverBase implements WebInterface {
                         return ((SearchContext) d).findElements(by).size() > 0;
                     }
                 });
-        return getDriverInstance().findElement(by);
+        return driver.findElement(by);
     }
 
     @Override
     public List<WebElement> waitForElementsBy(By by) {
-        WebDriverWait wait = new WebDriverWait(getDriverInstance(), 60);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.ignoring(NoSuchElementException.class);
         wait.ignoring(StaleElementReferenceException.class);
         wait.until(new Predicate<WebDriver>() {
@@ -64,12 +71,16 @@ public class WebPageBase extends WebDriverBase implements WebInterface {
                 return t.findElements(by).size() > 0;
             }
         });
-        return getDriverInstance().findElements(by);
+        return driver.findElements(by);
+    }
+    
+    public List<WebElement> waitForElementsBy(WebElement element, By by){
+    	return null;
     }
 
     @Override
     public void moveToElement(By by) {
-        Actions actions = new Actions(getDriverInstance());
+        Actions actions = new Actions(driver);
         actions.moveToElement(waitForElement(by)).build().perform();
     }
 
@@ -106,7 +117,7 @@ public class WebPageBase extends WebDriverBase implements WebInterface {
     public boolean hasNoElementAsExpected(By by) {
        WebElement element;
         try {
-            element = new WebDriverWait(getDriverInstance(), 5).until(ExpectedConditions
+            element = new WebDriverWait(driver, 5).until(ExpectedConditions
                     .presenceOfElementLocated(by));
         } catch (TimeoutException te) {
 
@@ -188,7 +199,7 @@ public class WebPageBase extends WebDriverBase implements WebInterface {
     @Override
     public void selectRadioButtonByValue(By radioGroup, String ValueToSelect) {
         // Find the radio group element
-        List<WebElement> radioLabels = getDriverInstance().findElements(
+        List<WebElement> radioLabels = driver.findElements(
                 radioGroup);
         for (int i = 0; i < radioLabels.size(); i++) {
             if (radioLabels.get(i).getText().trim()
@@ -209,12 +220,12 @@ public class WebPageBase extends WebDriverBase implements WebInterface {
         long currentWaitMillis = Configuration.ELEMENT_TIMEOUT_MILLIS;
         try {
             if (currentWaitMillis > 0) {
-                getDriverInstance().manage().timeouts()
+                driver.manage().timeouts()
                         .implicitlyWait(0, TimeUnit.MILLISECONDS);
             }
-            result = getDriverInstance().findElements(by).size();
+            result = driver.findElements(by).size();
         } finally {
-            getDriverInstance().manage().timeouts()
+            driver.manage().timeouts()
                     .implicitlyWait(currentWaitMillis, TimeUnit.MILLISECONDS);
         }
         return result;
