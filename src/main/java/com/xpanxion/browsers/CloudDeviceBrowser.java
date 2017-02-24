@@ -7,58 +7,57 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
-public class CloudDeviceBrowser extends DriverFactory{
-	
-	private  WebDriver driver;
-	public static final String URL = "https://" + configProperties.getCloudUserName() + ":" + configProperties.getCloudAutomationKey() + "@hub-cloud.browserstack.com/wd/hub";
-	String browserName;
-	String platform;
-	String device;
+public class CloudDeviceBrowser extends DriverFactory {
 
-	public WebDriver getDriver(){	
-		try
-		{
+    private WebDriver driver;
+    public static final String URL = "https://" + configProperties.getCloudUserName() + ":" + configProperties.getCloudAutomationKey() + "@hub-cloud.browserstack.com/wd/hub";
+    String browserName;
+    String platform;
+    String device;
+
+    @Override
+    public WebDriver getDriver() {
+        try {
 
             String platform = System.getProperty("platform.name");
-			DesiredCapabilities caps = new DesiredCapabilities();
-			caps.setCapability("browserName", configProperties.getBrowserName());
-			caps.setCapability("platform", platform);
-			caps.setCapability("device", configProperties.getDevice());
-		    caps.setCapability("browserstack.debug", "true");
-	
-		    driver = new RemoteWebDriver(new URL(URL), caps);
-		    driver = new Augmenter().augment(driver);
-		    
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return driver;
-	}
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability("browserName", configProperties.getBrowserName());
+            caps.setCapability("platform", platform);
+            caps.setCapability("device", configProperties.getDevice());
+            caps.setCapability("browserstack.debug", "true");
 
-	public String getBrowserName() {
-		return browserName;
-	}
+            driver = new RemoteWebDriver(new URL(URL), caps);
+            driver = new Augmenter().augment(driver);
 
-	public void setBrowserName(String browserName) {
-		this.browserName = browserName;
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	public String getPlatform() {
-		return platform;
-	}
+        return driver;
+    }
 
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
+    public String getBrowserName() {
+        return browserName;
+    }
 
-	public String getDevice() {
-		return device;
-	}
+    public void setBrowserName(String browserName) {
+        this.browserName = browserName;
+    }
 
-	public void setDevice(String device) {
-		this.device = device;
-	}
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
 
 }

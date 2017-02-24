@@ -12,4 +12,8 @@ public class DriverFactory {
         return drivers.get(Thread.currentThread().getName());
     }
 
+    public static void registerInstance(WebDriver driverInstance) {
+        drivers.put(Thread.currentThread().getName(),driverInstance);
+    }
+
 }

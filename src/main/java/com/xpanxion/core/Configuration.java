@@ -5,12 +5,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Properties;
-public class Configuration {
-    
-    private static Properties prop;
-    private static HashMap<String, String> urlMap;
 
-    private static Properties getProp() {
+public class Configuration {
+
+    private Properties prop;
+    private HashMap<String, String> urlMap;
+
+    private Properties getProp() {
 
         if (prop == null) {
             prop = new Properties();
@@ -24,34 +25,103 @@ public class Configuration {
                 e.printStackTrace();
             }
         }
-        
+
         return prop;
     }
-    
-    public static final Boolean REMOTE = new Boolean(getProp().getProperty("selenium.remote"));
-    public static final BrowserTypesNew BROWSER = BrowserTypesNew.valueOf(getProp().getProperty("selenium.browser"));
-    public static final String SELENIUM_GRID_URL = getProp().getProperty("selenium.gridurl");
-    public static final Boolean DEMO = new Boolean(getProp().getProperty("project.demo"));
 
-    public static final String HOST = getProp().getProperty("aut.server");
-    public static final Boolean USE_SSL = new Boolean(getProp().getProperty("aut.useSSL"));
+    private final Boolean remote = false;
+    private final String seleniumGridUrl = getProp().getProperty("selenium.gridurl"); 
+    private final Boolean demo = Boolean.valueOf(getProp().getProperty("project.demo")); 
 
-    public static final String MOBILE_DEVICE = "Galaxy S4";
-    public static final int MOBILE_WIDTH = 200;
-    public static final int MOBILE_HEIGHT = 600;
+    private final String host = getProp().getProperty("aut.server"); 
+    private final Boolean useSsl = Boolean.valueOf(getProp().getProperty("aut.useSSL")); 
 
+    private final String mobileDevice = "Galaxy S4"; 
+    private final int mobileWidth = 200; 
+    private final int mobileHeight = 600; 
 
-    public static final String CHROME_WEBDRIVER = getProp().getProperty("webdriver.chrome.driver");
-    public static final String IE_WEBDRIVER = getProp().getProperty("webdriver.ie.driver");
+    private final String chromeWebdriver = getProp().getProperty("webdriver.chrome.driver"); 
+    private final String ieWebdriver = getProp().getProperty("webdriver.ie.driver"); 
 
-    public static final String CONFLUENCE_USER = getProp().getProperty("confluence.user");
-    public static final String CONFLUENCE_PASSWORD = getProp().getProperty("confluence.password");
+    private final String confluenceUser = getProp().getProperty("confluence.user"); 
+    private final String confluencePassword = getProp().getProperty("confluence.password"); 
 
-    public static final String EXECUTION_ENVIRONMENT = getProp().getProperty("execution.environment");
-    public static final String NEW_LINE = System.lineSeparator();
+    private final String executionEnvironment = getProp().getProperty("execution.environment"); 
+    private final String newLine = System.lineSeparator(); 
 
-    public static final int ELEMENT_TIMEOUT_MILLIS = Integer.parseInt(getProp().getProperty("selenium.elementtimeout"));
-    public static final int PAGE_TIMEOUT_MILLIS = Integer.parseInt(getProp().getProperty("selenium.pagetimeout"));
-    public static final boolean SET_BROWSERMOB_PROXY = true;
-    
+    private final int elementTimeoutMillis = Integer.parseInt(getProp().getProperty("selenium.elementtimeout")); 
+    private final int pageTimeoutMillis = Integer.parseInt(getProp().getProperty("selenium.pagetimeout")); 
+    private final boolean setBrowsermobProxy = true; 
+
+    public HashMap<String, String> getUrlMap() {
+        return urlMap;
+    }
+
+    public boolean isRemote() {
+        return remote;
+    }
+
+    public String getSeleniumGridUrl() {
+        return seleniumGridUrl;
+    }
+
+    public boolean isDemo() {
+        return demo;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public boolean isUseSsl() {
+        return useSsl;
+    }
+
+    public String getMobileDevice() {
+        return mobileDevice;
+    }
+
+    public int getMobileWidth() {
+        return mobileWidth;
+    }
+
+    public int getMobileHeight() {
+        return mobileHeight;
+    }
+
+    public String getChromeWebdriver() {
+        return chromeWebdriver;
+    }
+
+    public String getIeWebdriver() {
+        return ieWebdriver;
+    }
+
+    public String getConfluenceUser() {
+        return confluenceUser;
+    }
+
+    public String getConfluencePassword() {
+        return confluencePassword;
+    }
+
+    public String getExecutionEnvironment() {
+        return executionEnvironment;
+    }
+
+    public String getNewLine() {
+        return newLine;
+    }
+
+    public int getElementTimeoutMillis() {
+        return elementTimeoutMillis;
+    }
+
+    public int getPageTimeoutMillis() {
+        return pageTimeoutMillis;
+    }
+
+    public boolean isSetBrowsermobProxy() {
+        return setBrowsermobProxy;
+    }
 }

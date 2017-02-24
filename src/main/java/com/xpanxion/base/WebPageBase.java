@@ -27,9 +27,11 @@ import org.openqa.selenium.support.ui.Select;
 public class WebPageBase implements WebInterface {
 
     protected WebDriver driver;
+    private Configuration config;
 
     public WebPageBase() {
         this.driver = DriverFactory.getDriverInstance();
+        this.config = new Configuration();
     }
 
     @Override
@@ -61,7 +63,11 @@ public class WebPageBase implements WebInterface {
     }
 
     public List<WebElement> waitForElementsBy(WebElement element, By by) {
-        return null;
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.ignoring(NoSuchElementException.class);
+        wait.ignoring(StaleElementReferenceException.class);
+        wait.until((WebDriver t) -> element.findElements(by).size() > 0);
+        return driver.findElements(by);
     }
 
     @Override
@@ -198,7 +204,7 @@ public class WebPageBase implements WebInterface {
 
     public int countElements(By by) {
         int result = 0;
-        long currentWaitMillis = Configuration.ELEMENT_TIMEOUT_MILLIS;
+        long currentWaitMillis = config.getElementTimeoutMillis();
         try {
             if (currentWaitMillis > 0) {
                 driver.manage().timeouts()

@@ -1,8 +1,9 @@
 package com.xpanxion.tests;
 
+import com.xpanxion.base.DriverFactory;
 import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.CoreTestCase;
-import com.xpanxion.keywords.Keywords;
+import com.xpanxion.keywords.WebFunctions;
 import com.xpanxion.pages.OrthogonalDataPage;
 import com.xpanxion.data.Employee;
 import java.util.Collections;
@@ -16,17 +17,13 @@ public class DataTablesTest extends CoreTestCase {
     @Test(dataProvider = "generic")
     public void dataTableTest(BrowserTypes type) {
         log().info("Executing the test");
-        WebDriver driver = type.getDriverInstance();
+        DriverFactory.registerInstance(type.getDriverInstance());
+        WebDriver driver = DriverFactory.getDriverInstance();
         driver.get("https://www.datatables.net/examples/ajax/orthogonal-data.html");
         OrthogonalDataPage page = new OrthogonalDataPage();
-        Keywords keywords = new Keywords();
-        List<Employee> employees = keywords.getEmployeeDetails(driver, page);
-        Comparator<Employee> c = new Comparator<Employee>() {
-            @Override
-            public int compare(Employee o1, Employee o2) {
-                return Float.compare(o1.getSalary(), o2.getSalary());
-            }
-        };
+        WebFunctions keywords = new WebFunctions();
+        List<Employee> employees = keywords.getEmployeeDetails(page);
+        Comparator<Employee> c = (Employee o1, Employee o2) -> Float.compare(o1.getSalary(), o2.getSalary());
         Collections.sort(employees, c);
         Employee highestSalariedPerson = employees.get(employees.size() - 1);
         Employee lowestSalariedPerson = employees.get(0);

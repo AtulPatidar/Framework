@@ -18,21 +18,21 @@ public class OrthogonalDataPage extends WebPageBase {
     }
 
     public List<WebElement> getColumns(WebElement rowElement) {
-        return rowElement.findElements(By.tagName("td"));
+        return waitForElementsBy(rowElement,By.tagName("td"));
     }
 
     public OrthogonalDataPage clickNext() {
-        WebElement nextBtnElement = WaitUtils.waitForElement(driver, nextBtn);
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,600);");
+        WebElement nextBtnElement = waitForElement(nextBtn);
+        getJavaScriptExecutor().executeScript("window.scrollBy(0,600);");
         if (nextBtnElement.isEnabled()) {
             nextBtnElement.click();
         }
-        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,-600);");
+        getJavaScriptExecutor().executeScript("window.scrollBy(0,-600);");
         return this;
     }
 
     public boolean isNextDisabled() {
-        String classAttrib = WaitUtils.waitForElement(driver, nextBtn).getAttribute("class");
+        String classAttrib = waitForElement(nextBtn).getAttribute("class");
         return classAttrib.contains("disabled");
     }
 }

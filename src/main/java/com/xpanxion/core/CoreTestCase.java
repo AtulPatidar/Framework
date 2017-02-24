@@ -1,5 +1,6 @@
 package com.xpanxion.core;
 
+import com.xpanxion.base.DriverFactory;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ public class CoreTestCase extends Assert {
         //String browser = System.getProperty("selenium.browser");
     }
 
-    @DataProvider(name = "generic")
+    @DataProvider(name = "generic", parallel = true)
     public static Object[][] getData() {
         BrowserTypes[][] browserTypes = new BrowserTypes[BrowserTypes.values().length][1];
         int i = 0;
@@ -33,7 +34,7 @@ public class CoreTestCase extends Assert {
 
     @AfterMethod
     public void tearDown() {
-        //driver.close();
+        DriverFactory.getDriverInstance().close();
     }
 
     public static Logger log() {

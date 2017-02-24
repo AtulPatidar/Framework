@@ -1,6 +1,6 @@
 package com.xpanxion.browsers;
 
-import com.xpanxion.common.ConfigProperties;
+import com.xpanxion.core.ConfigProperties;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;

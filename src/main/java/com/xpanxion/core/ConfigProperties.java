@@ -1,5 +1,4 @@
-package com.xpanxion.common;
-
+package com.xpanxion.core;
 
 public class ConfigProperties {
 
@@ -42,21 +41,21 @@ public class ConfigProperties {
     private static final String DEFAULTCOUNTRY = null;
     private String country = null;
 
-    public static final String CLOUDUSERNAME="";
+    public static final String CLOUDUSERNAME = "";
     private String cloudUserName = "";
 
-    public static final String AUTOMATE_KEY="";
+    public static final String AUTOMATE_KEY = "";
     private String cloudAutomationKey = "";
 
-    public static final String DEFAULTBROWSER="";
+    public static final String DEFAULTBROWSER = "";
     private BrowserTypes browser = BrowserTypes.CHROME;
 
-    public static final String DEFAULTBROWSERNAME="";
+    public static final String DEFAULTBROWSERNAME = "";
     private String browserName = "";
 
     public ConfigProperties() {
         //Browser is now handled in the xmlWriter
-        browser = BrowserTypes.valueOf(System.getProperty("browser",DEFAULTBROWSER));
+        //browser = BrowserTypes.valueOf(System.getProperty("browser",DEFAULTBROWSER));
         browserName = System.getProperty("browserName", DEFAULTBROWSERNAME);
         remote = System.getProperty("remote", DEFAULTREMOTE).equals("true");
         dataLocation = System.getProperty("dataLocation", DEFAULTDATALOCATION);
@@ -75,8 +74,7 @@ public class ConfigProperties {
         cloudAutomationKey = System.getProperty("key", AUTOMATE_KEY);
     }
 
-
-	public boolean isRemote() {
+    public boolean isRemote() {
         return remote;
     }
 
@@ -124,7 +122,9 @@ public class ConfigProperties {
         return envData;
     }
 
-    public String getCountry() { return country; }
+    public String getCountry() {
+        return country;
+    }
 
     public String getCloudUserName() {
         return cloudUserName;
