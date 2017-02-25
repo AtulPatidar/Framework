@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
-public class CloudDeviceBrowser extends DriverFactory {
+public class CloudDeviceBrowser extends WebDriverFactory {
 
     private WebDriver driver;
     public static final String URL = "https://" + configProperties.getCloudUserName() + ":" + configProperties.getCloudAutomationKey() + "@hub-cloud.browserstack.com/wd/hub";

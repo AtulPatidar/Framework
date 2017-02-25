@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
-public class ChromeWebDriver extends DriverFactory{
+public class ChromeWebDriver extends WebDriverFactory{
 	
 	private WebDriver webDriver;
 

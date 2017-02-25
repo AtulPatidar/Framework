@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResolutionBasedDriver extends DriverFactory{
+public class ResolutionBasedDriver extends WebDriverFactory{
 	
 	WebDriver driver;
 	int width;

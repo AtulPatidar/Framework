@@ -5,7 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
-public class FirefoxWebDriver extends DriverFactory{
+public class FirefoxWebDriver extends WebDriverFactory{
 	
 	WebDriver driver;
 

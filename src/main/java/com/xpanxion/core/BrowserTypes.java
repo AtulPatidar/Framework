@@ -1,6 +1,6 @@
 package com.xpanxion.core;
 
-import static com.xpanxion.browsers.DriverFactory.configProperties;
+import static com.xpanxion.browsers.WebDriverFactory.configProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

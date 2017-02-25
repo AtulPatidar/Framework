@@ -16,7 +16,7 @@ import java.util.Map;
  * @author surendrane
  *
  */
-public class MobileEmulatorDriver extends DriverFactory{
+public class MobileEmulatorDriver extends WebDriverFactory{
 	
 	WebDriver driver;
 	String deviceName;

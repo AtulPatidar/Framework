@@ -8,7 +8,7 @@ import org.testng.Reporter;
 
 import java.net.URL;
 
-public abstract class DriverFactory {
+public abstract class WebDriverFactory {
     public static ConfigProperties configProperties=new ConfigProperties();
     boolean isRemote = configProperties.isRemote();
 	public abstract WebDriver getDriver();
