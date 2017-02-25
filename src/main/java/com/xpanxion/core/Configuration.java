@@ -29,12 +29,14 @@ public class Configuration {
         return prop;
     }
 
-    private final Boolean remote = false;
+    private final boolean remote = false;
     private final String seleniumGridUrl = getProp().getProperty("selenium.gridurl"); 
-    private final Boolean demo = Boolean.valueOf(getProp().getProperty("project.demo")); 
+    private final boolean demo = Boolean.valueOf(getProp().getProperty("project.demo"));
+    private final String browsers = getProp().getProperty("selenium.browsers");
+    private final String mobiles = getProp().getProperty("selenium.mobiles");
 
     private final String host = getProp().getProperty("aut.server"); 
-    private final Boolean useSsl = Boolean.valueOf(getProp().getProperty("aut.useSSL")); 
+    private final boolean useSsl = Boolean.valueOf(getProp().getProperty("aut.useSSL")); 
 
     private final String mobileDevice = "Galaxy S4"; 
     private final int mobileWidth = 200; 
@@ -124,4 +126,14 @@ public class Configuration {
     public boolean isSetBrowsermobProxy() {
         return setBrowsermobProxy;
     }
+
+    public String getBrowsers() {
+        return browsers;
+    }
+
+    public String getMobiles() {
+        return mobiles;
+    }
+    
+    
 }

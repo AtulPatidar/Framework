@@ -13,23 +13,11 @@ import java.util.Set;
 
 public class CoreTestCase extends Assert {
 
-    protected Set<WebDriver> drivers = new HashSet<>();
     private final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 
     @BeforeMethod
     public void setup() {
         //String browser = System.getProperty("selenium.browser");
-    }
-
-    @DataProvider(name = "generic", parallel = true)
-    public static Object[][] getData() {
-        BrowserTypes[][] browserTypes = new BrowserTypes[BrowserTypes.values().length][1];
-        int i = 0;
-        for (BrowserTypes type : BrowserTypes.values()) {
-            browserTypes[i][0] = type;
-            i++;
-        }
-        return browserTypes;
     }
 
     @AfterMethod

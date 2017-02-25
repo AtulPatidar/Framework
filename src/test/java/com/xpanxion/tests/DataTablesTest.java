@@ -6,6 +6,7 @@ import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.keywords.WebFunctions;
 import com.xpanxion.pages.OrthogonalDataPage;
 import com.xpanxion.data.Employee;
+import com.xpanxion.dataproviders.DataProviderLibrary;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class DataTablesTest extends CoreTestCase {
 
-    @Test(dataProvider = "generic")
+    @Test(dataProvider = "generic",dataProviderClass = DataProviderLibrary.class)
     public void dataTableTest(BrowserTypes type) {
         log().info("Executing the test");
         DriverFactory.registerInstance(type.getDriverInstance());
