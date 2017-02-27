@@ -31,8 +31,8 @@ public interface WebInterface {
     public String getRandomString();
     public String getRandomNumeric();
     public JavascriptExecutor getJavaScriptExecutor();
-    public WebElement waitForElementGone();
-    public void clickElementWithJavascript();
+    public WebElement waitForElementGone(By by);
+    public void clickElementWithJavascript(WebElement element);
     public void handledSleep(int sleepInSeconds);
     public void waitTillMultipleTabOpens();
     public boolean verifyElementSelected(WebElement element, boolean selected);

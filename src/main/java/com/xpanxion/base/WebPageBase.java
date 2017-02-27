@@ -125,17 +125,29 @@ public class WebPageBase implements WebInterface {
 
     @Override
     public JavascriptExecutor getJavaScriptExecutor() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JavascriptExecutor js = (JavascriptExecutor) getDriverInstance();
+        return js;
     }
 
     @Override
-    public WebElement waitForElementGone() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public WebElement waitForElementGone(By by) {
+        FluentWait<WebDriver> wait = new FluentWait<>(getDriverInstance());
+        wait.withTimeout(15, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
+                .until(new Predicate<WebDriver>() {
+                    @Override
+                    public boolean apply(WebDriver t) {
+                        return !hasElement(waitForElement(by));
+                    }
+                });
+        return waitForElement(by);
     }
 
     @Override
-    public void clickElementWithJavascript() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void clickElementWithJavascript(WebElement element) {
+         if (driver() instanceof JavascriptExecutor) {
+            ((JavascriptExecutor) driver()).executeScript(
+                    "arguments[0].click()", element);
     }
 
     @Override
