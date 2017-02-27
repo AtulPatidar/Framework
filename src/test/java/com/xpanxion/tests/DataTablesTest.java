@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class DataTablesTest extends CoreTestCase {
 
-    @Test(dataProvider = "generic",dataProviderClass = DataProviderLibrary.class)
+    @Test(dataProvider = DataProviderLibrary.DP_GENERIC,dataProviderClass = DataProviderLibrary.class)
     public void dataTableTest(BrowserTypes type) {
         log().info("Executing the test");
         DriverFactory.registerInstance(type.getDriverInstance());

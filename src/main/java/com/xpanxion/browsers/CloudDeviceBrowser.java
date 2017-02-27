@@ -5,28 +5,32 @@ import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.xpanxion.core.Configuration;
+
 import java.net.URL;
 
 public class CloudDeviceBrowser extends WebDriverFactory {
 
     private WebDriver driver;
-    public static final String URL = "https://" + configProperties.getCloudUserName() + ":" + configProperties.getCloudAutomationKey() + "@hub-cloud.browserstack.com/wd/hub";
-    String browserName;
-    String platform;
-    String device;
+    
+//    private final String URL = "https://" + configProperties.getCloudUserName() + ":" + configProperties.getCloudAutomationKey() + "@hub-cloud.browserstack.com/wd/hub";
+    private String browserName;
+    private String platform;
+//    private String device;
 
     @Override
     public WebDriver getDriver() {
+    	Configuration config = Configuration.getInstance();
         try {
 
             String platform = System.getProperty("platform.name");
             DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setCapability("browserName", configProperties.getBrowserName());
+            caps.setCapability("browserName", config.getBrowserName());
             caps.setCapability("platform", platform);
-            caps.setCapability("device", configProperties.getDevice());
+            caps.setCapability("device", config.getDevice());
             caps.setCapability("browserstack.debug", "true");
 
-            driver = new RemoteWebDriver(new URL(URL), caps);
+            driver = new RemoteWebDriver(new URL(config.getHubUrl()), caps);
             driver = new Augmenter().augment(driver);
 
         } catch (Exception e) {
@@ -52,12 +56,12 @@ public class CloudDeviceBrowser extends WebDriverFactory {
         this.platform = platform;
     }
 
-    public String getDevice() {
-        return device;
-    }
+//    public String getDevice() {
+//        return device;
+//    }
 
-    public void setDevice(String device) {
-        this.device = device;
-    }
+//    public void setDevice(String device) {
+//        this.device = device;
+//    }
 
 }

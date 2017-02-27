@@ -1,17 +1,16 @@
 package com.xpanxion.core;
 
-import static com.xpanxion.browsers.WebDriverFactory.configProperties;
+import java.net.URL;
+
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.net.URL;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Reporter;
 
@@ -29,8 +28,8 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
             capabilities.setPlatform(Platform.ANY);
             WebDriver webDriver;
-            if (getConfig().isRemote()) {
-                webDriver = launchGridDriver(capabilities, configProperties.getNodeUrl());
+            if (Configuration.getInstance().isRemote()) {
+                webDriver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'CHROME' ", true);
             } else {
                 webDriver = new ChromeDriver(capabilities);
@@ -48,11 +47,11 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             capabilities.setCapability("marionette", true);
             WebDriver driver = null;
 
-            if (getConfig().isRemote()) {
-                driver = launchGridDriver(capabilities, configProperties.getNodeUrl());
+            if (Configuration.getInstance().isRemote()) {
+                driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'Firefox'", true);
             } else {
-                driver = new FirefoxDriver(capabilities);
+            	driver = new FirefoxDriver(capabilities);
                 Reporter.log("Running test in browser 'FIREFOX'", true);
             }
 
@@ -81,8 +80,5 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
         }
     }
 
-    private static Configuration getConfig() {
-        Configuration config = new Configuration();
-        return config;
-    }
+    
 }

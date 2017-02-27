@@ -224,8 +224,10 @@ public class WebPageBase implements WebInterface {
     public boolean isFileOpened(File file) {
         boolean res = false;
         FileLock lock = null;
+        RandomAccessFile raf=null;
         try {
-            FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
+        	raf = new RandomAccessFile(file, "rw");
+            FileChannel channel = raf.getChannel();
             // Get an exclusive lock on the whole file
             lock = channel.lock();
 
@@ -236,8 +238,13 @@ public class WebPageBase implements WebInterface {
             res = true;
         } finally {
             try {
-                lock.release();
-                lock.close();
+            	if(raf!=null){
+            		raf.close();
+            	}
+            	if(lock!=null){
+            		lock.release();
+            		lock.close();
+            	}
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

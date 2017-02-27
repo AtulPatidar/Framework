@@ -11,8 +11,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <selenium.browser>CHROME</selenium.browser>
         <selenium.remote>false</selenium.remote>
-        <selenium.gridurl></selenium.gridurl>
-        <project.demo>false</project.demo>
+        <selenium.hub_url></selenium.hub_url>
+        <project.debug_mode>false</project.debug_mode>
         <aut.server></aut.server>
         <aut.useSSL></aut.useSSL>
         <selenium.elementtimeout>10</selenium.elementtimeout>

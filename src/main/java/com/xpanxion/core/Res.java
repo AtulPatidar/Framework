@@ -12,7 +12,6 @@ package com.xpanxion.core;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Properties;
 
 public class Res {
 

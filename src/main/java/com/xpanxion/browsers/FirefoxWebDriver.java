@@ -5,6 +5,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
+import com.xpanxion.core.Configuration;
+
 public class FirefoxWebDriver extends WebDriverFactory{
 	
 	WebDriver driver;
@@ -20,7 +22,7 @@ public class FirefoxWebDriver extends WebDriverFactory{
 		//driver = new FirefoxDriver(capabilities);
 
         if (isRemote) {
-            driver = launchGridDriver(capabilities, configProperties.getNodeUrl());
+            driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
             Reporter.log("Running test on Grid, in browser 'Firefox'", true);
         } else {
             driver = new FirefoxDriver(capabilities);

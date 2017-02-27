@@ -7,17 +7,21 @@ import org.testng.annotations.DataProvider;
 
 public class DataProviderLibrary {
 
-    @DataProvider(name = "generic", parallel = true)
+	public static final String DP_GENERIC="DP_GENERIC";
+	public static final String DP_GENERIC_MOBILE="GENERIC_MOBILE";
+	public static final String DP_SAMPLE_DATA="SAMPLEDATA";
+	
+    @DataProvider(name = DP_GENERIC, parallel = true)
     public static Object[][] getBrowsersForWeb() {
         return injectBrowserInstancesToDataProviders(null);
     }
 
-    @DataProvider(name = "generic_mobile", parallel = true)
+    @DataProvider(name = DP_GENERIC_MOBILE, parallel = true)
     public static Object[][] getBrowsers() {
         return injectMobileInstancesToDataProviders(null);
     }
 
-    @DataProvider(name = "sampleData", parallel = true)
+    @DataProvider(name = DP_SAMPLE_DATA, parallel = true)
     public static Object[][] getSampleData() {
         String[][] data = new String[][]{{"Rajesh", "Xpanxion"}, {"Vikas", "Xpanxion"}, {"CD", "Xpanxion"}, {"Devraj", "Xpanxion"}};
         Object[][] updatedData = injectBrowserInstancesToDataProviders(data);

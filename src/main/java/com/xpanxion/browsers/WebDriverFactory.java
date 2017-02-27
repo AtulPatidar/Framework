@@ -1,16 +1,16 @@
 package com.xpanxion.browsers;
 
-import com.xpanxion.core.ConfigProperties;
+import java.net.URL;
+
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Reporter;
 
-import java.net.URL;
+import com.xpanxion.core.Configuration;
 
 public abstract class WebDriverFactory {
-    public static ConfigProperties configProperties=new ConfigProperties();
-    boolean isRemote = configProperties.isRemote();
+    boolean isRemote = Configuration.getInstance().isRemote();
 	public abstract WebDriver getDriver();
 
     /**

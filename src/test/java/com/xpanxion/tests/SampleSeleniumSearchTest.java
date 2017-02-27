@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 
 public class SampleSeleniumSearchTest extends CoreTestCase {
 
-    @Test(dataProvider = "sampleData", dataProviderClass = DataProviderLibrary.class)
+    @Test(dataProvider = DataProviderLibrary.DP_SAMPLE_DATA, dataProviderClass = DataProviderLibrary.class)
     public void testGoogleSearch(BrowserTypes types, String name, String company) {
         DriverFactory.registerInstance(types.getDriverInstance());
         WebDriver driver = DriverFactory.getDriverInstance();

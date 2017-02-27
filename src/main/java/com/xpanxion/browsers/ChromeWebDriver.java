@@ -8,6 +8,8 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
+import com.xpanxion.core.Configuration;
+
 public class ChromeWebDriver extends WebDriverFactory{
 	
 	private WebDriver webDriver;
@@ -24,7 +26,7 @@ public class ChromeWebDriver extends WebDriverFactory{
         capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         capabilities.setPlatform(Platform.ANY);
         if (isRemote) {
-            webDriver = launchGridDriver(capabilities, configProperties.getNodeUrl());
+            webDriver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
             Reporter.log("Running test on Grid, in browser 'CHROME' ", true);
         } else {
             webDriver = new ChromeDriver(capabilities);
