@@ -37,7 +37,7 @@ public interface WebInterface {
     public void waitTillMultipleTabOpens();
     public boolean verifyElementSelected(WebElement element, boolean selected);
     public void switchToLastTab();
-    public void switchToFirstWindow();
+    public void switchToFirstTab();
     public void closeTab();
     public void scrollToElementAndClick(By by);
     public boolean isFileOpened(File file);

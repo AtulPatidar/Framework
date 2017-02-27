@@ -18,6 +18,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.xpanxion.core.Configuration;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Set;
 import org.openqa.selenium.support.ui.Select;
 
 /**
@@ -125,19 +133,19 @@ public class WebPageBase implements WebInterface {
 
     @Override
     public JavascriptExecutor getJavaScriptExecutor() {
-        JavascriptExecutor js = (JavascriptExecutor) getDriverInstance();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         return js;
     }
 
     @Override
     public WebElement waitForElementGone(By by) {
-        FluentWait<WebDriver> wait = new FluentWait<>(getDriverInstance());
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
         wait.withTimeout(15, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)
                 .until(new Predicate<WebDriver>() {
                     @Override
                     public boolean apply(WebDriver t) {
-                        return !hasElement(waitForElement(by));
+                        return !hasElement(by);
                     }
                 });
         return waitForElement(by);
@@ -145,54 +153,102 @@ public class WebPageBase implements WebInterface {
 
     @Override
     public void clickElementWithJavascript(WebElement element) {
-         if (driver() instanceof JavascriptExecutor) {
-            ((JavascriptExecutor) driver()).executeScript(
+        if (driver instanceof JavascriptExecutor) {
+            ((JavascriptExecutor) driver).executeScript(
                     "arguments[0].click()", element);
+        }
     }
 
     @Override
     public void handledSleep(int sleepInSeconds) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Calendar cal = Calendar.getInstance();
+        Calendar cal1 = Calendar.getInstance();
+        cal1.add(Calendar.SECOND, sleepInSeconds);
+        while (cal1.after(cal)) {
+            cal = Calendar.getInstance();
+        }
     }
 
     @Override
     public void waitTillMultipleTabOpens() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Set<String> allWindows = driver.getWindowHandles();
+        while (allWindows.size() == 1) {
+            allWindows = driver.getWindowHandles();
+        }
     }
 
     @Override
     public boolean verifyElementSelected(WebElement element, boolean selected) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (new WebDriverWait(driver, 5)).until(ExpectedConditions
+                .elementSelectionStateToBe(element, selected));
     }
 
     @Override
     public void switchToLastTab() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<String> browserTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(browserTabs.get(browserTabs.size() - 1));
     }
 
     @Override
-    public void switchToFirstWindow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void switchToFirstTab() {
+        Set<String> handles = driver.getWindowHandles();
+        for (int i = handles.size(); i > 1; i--) {
+            driver.switchTo().window(
+                    handles.toArray(new String[handles.size()])[i - 1]);
+            driver.close();
+        }
+        driver.switchTo().window(
+                handles.toArray(new String[handles.size()])[0]);
     }
 
     @Override
     public void closeTab() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        driver.close();
+        List<String> browserTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(browserTabs.get(browserTabs.size() - 1));
     }
 
     @Override
     public void scrollToElementAndClick(By by) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        scrollToElement(by);
+        waitForElement(by).click();
+    }
+
+    public void scrollToElement(By by) {
+        int scrollBy = waitForElement(by).getLocation().y + 25;
+        getJavaScriptExecutor().executeScript(
+                "window.scrollBy(0," + scrollBy + ");");
     }
 
     @Override
     public boolean isFileOpened(File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean res = false;
+        FileLock lock = null;
+        try {
+            FileChannel channel = new RandomAccessFile(file, "rw").getChannel();
+            // Get an exclusive lock on the whole file
+            lock = channel.lock();
+
+            //The file is not already opened
+            lock = channel.tryLock();
+        } catch (OverlappingFileLockException | IOException e) {
+            // File is open by someone else
+            res = true;
+        } finally {
+            try {
+                lock.release();
+                lock.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return res;
     }
 
     @Override
     public String getTextFromElement(By by) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return waitForElement(by).getText();
     }
 
     @Override
@@ -229,5 +285,4 @@ public class WebPageBase implements WebInterface {
         }
         return result;
     }
-
 }
