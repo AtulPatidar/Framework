@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import com.xpanxion.exceptions.InvalidPropertyException;
 
 public class Configuration {
@@ -14,7 +16,7 @@ public class Configuration {
 	private Properties prop;
 	// private HashMap<String, String> urlMap;
 	private Properties systemProps;
-//	private Properties defaultProps;
+	// private Properties defaultProps;
 
 	// TODO: Write a private default constructor
 
@@ -63,11 +65,9 @@ public class Configuration {
 		if (value != null) {
 			return value;
 		}
-		throw new InvalidPropertyException("Invalid property name: " + propName);
-		
-	}
+		throw new InvalidPropertyException("Property value not found for : " + propName);
 
-	
+	}
 
 	private final boolean remote = Boolean.parseBoolean(get("selenium.remote"));
 	private final String browsers = get("selenium.browsers");
@@ -195,6 +195,11 @@ public class Configuration {
 		String PAGE_TIMEOUT = "selenium.page_timeout";
 		String BROWSERS = "selenium.browsers";
 		String MOBILES = "selenium.mobiles";
+		String CAP_APP_PATH = "capability.app";
+		String APPIUM_NODE_PATH="appium.node.path";
+		String APPIUM_JS_PATH="appium.js.path";
+		String APPIUM_LOG_PATH="appium.log.path";
+		String APPIUM_LOG_LEVEL="appium.log.level";
 
 	}
 
@@ -204,8 +209,39 @@ public class Configuration {
 	}
 
 	public String getBrowserName() {
-		//TODO: remove this methods
+		// TODO: remove this methods
 		return "";
+	}
+
+	public String getAppPath() {
+		return get(PropKeys.CAP_APP_PATH);
+	}
+
+	public DesiredCapabilities getCapabilities() {
+		DesiredCapabilities capabilities = new DesiredCapabilities();
+		for (String key : prop.stringPropertyNames()) {
+			if (key.toLowerCase().startsWith(Constants.CAPABILITY_PROP_PREFIX)) {
+				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()),get(key));
+			}
+		}
+		for (String key : systemProps.stringPropertyNames()) {
+			if (key.toLowerCase().startsWith(Constants.CAPABILITY_PROP_PREFIX)) {
+				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()),get(key));
+			}
+		}
+		return capabilities;
+	}
+	public String getAppiumNodePath(){
+		return get(PropKeys.APPIUM_NODE_PATH);
+	}
+	public String getAppiumJsFilePath(){
+		return get(PropKeys.APPIUM_JS_PATH);
+	}
+	public String getAppiumLogFilePath(){
+		return get(PropKeys.APPIUM_LOG_PATH);
+	}
+	public String getAppiumLogLevel(){
+		return get(PropKeys.APPIUM_LOG_LEVEL);
 	}
 
 }
