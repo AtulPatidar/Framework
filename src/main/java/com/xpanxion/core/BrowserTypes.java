@@ -19,7 +19,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     CHROME {
         @Override
         public WebDriver getDriverInstance() {
-            String chromePath = "D:\\chromedriver.exe";
+            String chromePath = "C:\\TestDrivers\\chromedriver.exe";
             System.setProperty("webdriver.chrome.driver", chromePath);
             DesiredCapabilities capabilities;
             capabilities = DesiredCapabilities.chrome();
@@ -42,7 +42,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     }, FIREFOX {
         @Override
         public WebDriver getDriverInstance() {
-            String firefoxPath = "D:\\geckodriver.exe";
+            String firefoxPath = "C:\\TestDrivers\\geckodriver.exe";
             System.setProperty("webdriver.gecko.driver", firefoxPath);
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             capabilities.setCapability("marionette", true);
@@ -62,7 +62,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     }, IE {
         @Override
         public WebDriver getDriverInstance() {
-            System.setProperty("webdriver.ie.driver", "D:\\IEDriverServer.exe");
+            System.setProperty("webdriver.ie.driver", "C:\\TestDrivers\\IEDriverServer.exe");
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
             WebDriver driver = new InternetExplorerDriver(capabilities);
