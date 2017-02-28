@@ -71,6 +71,7 @@ public class Configuration {
 
 	private final boolean remote = Boolean.parseBoolean(get("selenium.remote"));
 	private final String browsers = get("selenium.browsers");
+	private final String platforms = get("mobile.platforms");
 	// private final String mobiles = getProp().getProperty("selenium.mobiles");
 
 	// private final String host = getProp().getProperty("aut.server");
@@ -176,6 +177,10 @@ public class Configuration {
 	public String getBrowsers() {
 		return browsers;
 	}
+	
+	public String getPlatforms() {
+		return platforms;
+	}
 
 	//
 	// public String getMobiles() {
@@ -221,12 +226,12 @@ public class Configuration {
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		for (String key : prop.stringPropertyNames()) {
 			if (key.toLowerCase().startsWith(Constants.CAPABILITY_PROP_PREFIX)) {
-				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()),get(key));
+				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()+1),get(key));
 			}
 		}
 		for (String key : systemProps.stringPropertyNames()) {
 			if (key.toLowerCase().startsWith(Constants.CAPABILITY_PROP_PREFIX)) {
-				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()),get(key));
+				capabilities.setCapability(key.substring(Constants.CAPABILITY_PROP_PREFIX.length()+1),get(key));
 			}
 		}
 		return capabilities;

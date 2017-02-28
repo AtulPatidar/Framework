@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.Calendar;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xpanxion.core.Configuration;
 import com.xpanxion.core.CoreTestCase;
@@ -21,7 +20,7 @@ public class AppiumServer {
 	private static final Configuration CONFIG = Configuration.getInstance();
 	private static final Logger LOGGER = Logger.getLogger(CoreTestCase.class);
 
-	public static void startServer(String hubUrl, DesiredCapabilities caps) {
+	public static void startServer(String hubUrl) {
 		LOGGER.info("Is Server already running: " + isServerRunning(hubUrl));
 
 		try {
@@ -56,7 +55,6 @@ public class AppiumServer {
 		} catch (MalformedURLException e) {
 			LOGGER.error("Invalid Appium hub URL: " + hubUrl);
 		} catch (Throwable e) {
-
 			e.printStackTrace();
 		}
 	}

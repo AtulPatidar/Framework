@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.xpanxion.exceptions.InvalidHubUrlException;
+import com.xpanxion.utils.AppiumServer;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -28,6 +29,7 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
+				AppiumServer.startServer(getAppiumUrl().toString());
 				driver = new AndroidDriver<WebElement>(getAppiumUrl(),capabilities);
 			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
 				LOG.error("Failed to launch application, Please make sure appium server is up and running at: "
@@ -46,6 +48,8 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 			return null;
 		}
 	};
+	
+	
 	final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 	private static DesiredCapabilities getCapability() {
 		Configuration config = Configuration.getInstance();
@@ -56,6 +60,7 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		}
 		return capabilities;
 	}
+	
 	private static URL getAppiumUrl(){
 		String appiumhubUrl = Configuration.getInstance().getHubUrl();
 		try{

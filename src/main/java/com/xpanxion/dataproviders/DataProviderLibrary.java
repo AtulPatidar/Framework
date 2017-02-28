@@ -8,16 +8,22 @@ import org.testng.annotations.DataProvider;
 public class DataProviderLibrary {
 
 	public static final String DP_GENERIC="DP_GENERIC";
-	public static final String DP_GENERIC_MOBILE="GENERIC_MOBILE";
+	public static final String DP_GENERIC_MOBILE_BROWSERS="GENERIC_MOBILE";
 	public static final String DP_SAMPLE_DATA="SAMPLEDATA";
+	public static final String DP_GENERIC_MOBILE_NATIVE="MOBILE_NATIVE";
 	
     @DataProvider(name = DP_GENERIC, parallel = true)
     public static Object[][] getBrowsersForWeb() {
         return injectBrowserInstancesToDataProviders(null);
     }
 
-    @DataProvider(name = DP_GENERIC_MOBILE, parallel = true)
-    public static Object[][] getBrowsers() {
+    @DataProvider(name = DP_GENERIC_MOBILE_BROWSERS, parallel = true)
+    public static Object[][] getBrowsersForMobile() {
+        return injectMobileInstancesToDataProviders(null);
+    }
+    
+    @DataProvider(name = DP_GENERIC_MOBILE_NATIVE, parallel = true)
+    public static Object[][] getNativePlatform() {
         return injectMobileInstancesToDataProviders(null);
     }
 
@@ -48,18 +54,18 @@ public class DataProviderLibrary {
 
     private static Object[][] injectMobileInstancesToDataProviders(String[][] data) {
         Configuration config = new Configuration();
-        String[] browsers = config.getBrowsers().split(",");
-        MobileTypes[] browsersToBeSelected = selectMobilesBasedOnConfiguration(browsers);
+        String[] platforms = config.getPlatforms().split(",");
+        MobileTypes[] platformsToBeSelected = selectMobilesBasedOnConfiguration(platforms);
         if (data == null) {
-            Object[][] updatedData = new Object[browsersToBeSelected.length][0];
+            Object[][] updatedData = new Object[platformsToBeSelected.length][1];
             int i = 0;
-            for (MobileTypes types : browsersToBeSelected) {
+            for (MobileTypes types : platformsToBeSelected) {
                 updatedData[i][0] = types;
                 i++;
             }
             return updatedData;
         } else {
-            Object[][] updatedData = blendMobileTypesWithData(browsersToBeSelected, data);
+            Object[][] updatedData = blendMobileTypesWithData(platformsToBeSelected, data);
             return updatedData;
         }
     }
@@ -118,14 +124,14 @@ public class DataProviderLibrary {
         return updatedData;
     }
 
-    private static MobileTypes[] selectMobilesBasedOnConfiguration(String[] browsers) {
-        MobileTypes[] types = new MobileTypes[browsers.length];
+    private static MobileTypes[] selectMobilesBasedOnConfiguration(String[] platforms) {
+        MobileTypes[] types = new MobileTypes[platforms.length];
         int i = 0;
-        for (String browser : browsers) {
-            if (browser.equalsIgnoreCase("ALL")) {
+        for (String platform : platforms) {
+            if (platform.equalsIgnoreCase("ALL")) {
                 return MobileTypes.values();
             } else {
-                types[i] = MobileTypes.valueOf(browser.toUpperCase());
+                types[i] = MobileTypes.valueOf(platform.toUpperCase());
                 i++;
             }
         }
