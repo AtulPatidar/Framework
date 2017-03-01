@@ -18,7 +18,7 @@ public class SampleSeleniumSearchTest extends CoreTestCase {
 
         driver.get("http://www.google.com");
         driver.findElement(By.id("lst-ib")).sendKeys(name + " from " + company);
-        driver.findElement(By.name("btnG")).click();
+        driver.findElement(By.name("btnG1")).click();
     }
 
 }

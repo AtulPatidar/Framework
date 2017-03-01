@@ -5,6 +5,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import com.xpanxion.base.DriverFactory;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import javax.imageio.ImageIO;
+import org.testng.ITestResult;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class CoreTestCase {
 
@@ -31,9 +39,12 @@ public class CoreTestCase {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown(ITestResult itr) throws IOException, URISyntaxException {
         if (DriverFactory.getDriverInstance() == null) {
         } else {
+            //Screenshot screenshot = new AShot()
+              //      .takeScreenshot(DriverFactory.getDriverInstance());
+            //ImageIO.write(screenshot.getImage(), "PNG", new File(Res.getResource(itr.getMethod().getMethodName()+".png").toURI()));
             DriverFactory.getDriverInstance().quit();
         }
     }
