@@ -15,8 +15,14 @@ public class SampleMobileTestCase extends CoreTestCase {
     public void testAppLaunch(MobileTypes types) {
         DriverFactory.registerInstance(types.getDriverInstance());
         WebDriver driver = DriverFactory.getDriverInstance();
-
-        driver.findElement(By.name("Pune, Maharashtra"));
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        String loc = driver.findElement(By.id("com.weather.Weather:id/location_actionbar_name")).getText();
+        System.out.println(loc);
     }
 
 }
