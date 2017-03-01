@@ -11,13 +11,31 @@ public class CoreTestCase {
     private final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 
     @BeforeMethod
-    public void setup() {
-        //String browser = System.getProperty("selenium.browser");
+    public void setup(Object[] testArgs) {
+        Configuration config = new Configuration();
+        if (testArgs != null && testArgs.length > 0 && BrowserTypes.class.isAssignableFrom(testArgs[0].getClass())) {
+        } else {
+            if (config.getTestType().equalsIgnoreCase(TestTypes.WEB.name())) {
+                if (!config.getBrowsers().contains(",")) {
+                    if (config.getBrowsers().equalsIgnoreCase("ALL")) {
+                        DriverFactory.registerInstance(BrowserTypes.values()[0].getDriverInstance());
+                    } else {
+                        DriverFactory.registerInstance(BrowserTypes.valueOf(config.getBrowsers()).getDriverInstance());
+                    }
+                } else {
+                    DriverFactory.registerInstance(BrowserTypes.valueOf(config.getBrowsers().split(",")[0]).getDriverInstance());
+                }
+            }
+            //String browser = System.getProperty("selenium.browser");
+        }
     }
 
     @AfterMethod
     public void tearDown() {
-        DriverFactory.getDriverInstance().quit();
+        if (DriverFactory.getDriverInstance() == null) {
+        } else {
+            DriverFactory.getDriverInstance().quit();
+        }
     }
 
     public static Logger log() {

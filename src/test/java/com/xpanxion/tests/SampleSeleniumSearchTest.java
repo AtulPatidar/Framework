@@ -5,15 +5,15 @@ import com.xpanxion.core.BrowserTypes;
 import org.testng.annotations.Test;
 
 import com.xpanxion.core.CoreTestCase;
-import com.xpanxion.dataproviders.DataProviderLibrary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SampleSeleniumSearchTest extends CoreTestCase {
 
-    @Test(dataProvider = DataProviderLibrary.DP_SAMPLE_DATA, dataProviderClass = DataProviderLibrary.class)
-    public void testGoogleSearch(BrowserTypes types, String name, String company) {
-        DriverFactory.registerInstance(types.getDriverInstance());
+    @Test
+    public void testGoogleSearch() {
+        String name = "Rajesh";
+        String company = "Xpanxion";
         WebDriver driver = DriverFactory.getDriverInstance();
 
         driver.get("http://www.google.com");

@@ -7,6 +7,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -61,10 +62,8 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     }, IE {
         @Override
         public WebDriver getDriverInstance() {
-            System.setProperty("webdriver.ie.driver", "C:\\TestDrivers\\IEDriverServer.exe");
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-            WebDriver driver = new InternetExplorerDriver(capabilities);
+            System.setProperty("webdriver.edge.driver", "C:\\TestDrivers\\MicrosoftWebDriver.exe");
+            WebDriver driver = new EdgeDriver();
             return driver;
         }
 
