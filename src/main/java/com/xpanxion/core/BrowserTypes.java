@@ -29,7 +29,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             capabilities.setPlatform(Platform.ANY);
             WebDriver webDriver;
             if (Configuration.getInstance().isRemote()) {
-                webDriver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
+                webDriver = new RemoteWebDriver(capabilities);
                 Reporter.log("Running test on Grid, in browser 'CHROME' ", true);
             } else {
                 webDriver = new ChromeDriver(capabilities);
@@ -48,7 +48,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             WebDriver driver = null;
 
             if (Configuration.getInstance().isRemote()) {
-                driver = launchGridDriver(null, Configuration.getInstance().getHubUrl());
+                driver = new RemoteWebDriver(capabilities);
                 Reporter.log("Running test on Grid, in browser 'Firefox'", true);
             } else {
             	driver = new FirefoxDriver();

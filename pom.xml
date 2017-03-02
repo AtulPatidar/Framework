@@ -20,7 +20,7 @@
         <selenium.pagetimeout>30</selenium.pagetimeout>
         <jacksonVersion>2.7.1</jacksonVersion>
         <selenium.multibrowser>false</selenium.multibrowser>
-        <xpanxion.testtype>MOBILE</xpanxion.testtype>
+        <xpanxion.testtype>WEB</xpanxion.testtype>
         <execution.file>src/test/resources/web_tests.xml</execution.file>
     </properties>
 
@@ -168,7 +168,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>com.xpanxion.core.listeners.AnthemExtentReportListener</value>
+                            <value>com.xpanxion.core.listeners.XpanxionExtentReportListener</value>
                         </property>
                     </properties>
                     <parallel>methods</parallel>

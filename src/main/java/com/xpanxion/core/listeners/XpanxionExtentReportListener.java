@@ -25,7 +25,7 @@ import com.relevantcodes.extentreports.LogStatus;
  * 
  * This is the listener used for extent reporting
  */
-public class AnthemExtentReportListener implements IReporter {
+public class XpanxionExtentReportListener implements IReporter {
     private ExtentReports extent;
   
     @Override
