@@ -3,7 +3,6 @@ package com.xpanxion.dataproviders;
 import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.Configuration;
 import com.xpanxion.core.MobileTypes;
-import javax.swing.JOptionPane;
 import org.testng.annotations.DataProvider;
 
 public class DataProviderLibrary {
