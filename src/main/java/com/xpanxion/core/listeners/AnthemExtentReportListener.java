@@ -74,7 +74,7 @@ public class AnthemExtentReportListener implements IReporter {
                 }
                 File file = new File("");
                 if(result.getStatus()==ITestResult.FAILURE){
-                		test.log(LogStatus.FAIL, "Click on the snapshot below to zoom it: " + test.addScreenCapture(file.getAbsolutePath() + "/target/surefire-reports/html/" + result.getName() + ".png"));
+                		test.log(LogStatus.FAIL, "Click on the snapshot below to zoom it: " + test.addScreenCapture(file.getAbsolutePath() + "/target/surefire-reports/screenshots/" + result.getName() + ".png"));
                 }
                 /*for (String group : result.getMethod().getGroups())
                     test.assignCategory(group);*/

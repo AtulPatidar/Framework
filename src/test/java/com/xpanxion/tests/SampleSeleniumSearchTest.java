@@ -1,7 +1,6 @@
 package com.xpanxion.tests;
 
 import com.xpanxion.base.DriverFactory;
-import com.xpanxion.core.BrowserTypes;
 import org.testng.annotations.Test;
 
 import com.xpanxion.core.CoreTestCase;
