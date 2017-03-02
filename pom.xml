@@ -12,7 +12,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <selenium.browser>CHROME</selenium.browser>
         <selenium.remote>false</selenium.remote>
-        <selenium.hub_url></selenium.hub_url>
+        <selenium.hub_url>http://127.0.0.1:4723/wd/hub</selenium.hub_url>
         <project.debug_mode>false</project.debug_mode>
         <aut.server></aut.server>
         <aut.useSSL></aut.useSSL>
@@ -20,7 +20,7 @@
         <selenium.pagetimeout>30</selenium.pagetimeout>
         <jacksonVersion>2.7.1</jacksonVersion>
         <selenium.multibrowser>false</selenium.multibrowser>
-        <xpanxion.testtype>WEB</xpanxion.testtype>
+        <xpanxion.testtype>MOBILE</xpanxion.testtype>
         <execution.file>src/test/resources/web_tests.xml</execution.file>
     </properties>
 

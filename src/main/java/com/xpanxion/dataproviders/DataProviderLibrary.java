@@ -26,12 +26,13 @@ public class DataProviderLibrary {
         return injectBrowserInstancesToDataProviders(null);
     }
 
-    @DataProvider(name = DP_GENERIC_MOBILE_BROWSERS, parallel = true)
+    @DataProvider(name = DP_GENERIC_MOBILE_BROWSERS, parallel = false)
     public static Object[][] getBrowsersForMobile() {
-        return injectMobileInstancesToDataProviders(null);
+        
+    	return injectMobileInstancesToDataProviders(null);
     }
 
-    @DataProvider(name = DP_GENERIC_MOBILE_NATIVE, parallel = true)
+    @DataProvider(name = DP_GENERIC_MOBILE_NATIVE, parallel = false)
     public static Object[][] getNativePlatform() {
         return injectMobileInstancesToDataProviders(null);
     }

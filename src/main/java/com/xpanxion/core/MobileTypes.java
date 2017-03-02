@@ -41,6 +41,28 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		}
 
 	},
+	ANDROID_WEB {
+		@Override
+		public AppiumDriver<WebElement> getDriverInstance() {
+			
+			DesiredCapabilities capabilities = getCapability();
+			
+			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
+			AppiumDriver<WebElement> driver;
+			try {
+				LOG.info("Starting appium server...");
+				AppiumServer.startServer(getAppiumUrl().toString());
+				driver = new AndroidDriver<WebElement>(getAppiumUrl(),capabilities);
+			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
+				LOG.error("Failed to launch application, Please make sure appium server is up and running at: "
+						+ getAppiumUrl(), e);
+				e.printStackTrace();
+				throw e;
+			}
+			return driver;
+		}
+
+	},
 	IOS {
 		@Override
 		public WebDriver getDriverInstance() {
