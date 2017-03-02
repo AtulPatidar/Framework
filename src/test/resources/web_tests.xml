@@ -4,9 +4,9 @@
     <listeners></listeners>
     <test name="XPert Automation Web Tests">
         <classes>
-            <class>com.xpanxion.tests.DataTablesTest</class>
-            <class>com.xpanxion.tests.SampleSeleniumSearchTest</class>
-            <class>com.xpanxion.tests.SampleToolsQATest</class>
+            <!--<class>com.xpanxion.tests.DataTablesTest</class>-->
+            <!--<class>com.xpanxion.tests.SampleSeleniumSearchTest</class>-->
+            <class name="com.xpanxion.tests.SampleToolsQATest"/>
         </classes>
     </test>
 </suite>
