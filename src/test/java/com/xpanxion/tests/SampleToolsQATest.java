@@ -26,14 +26,14 @@ public class SampleToolsQATest extends CoreTestCase{
        driver.get("https://mvnrepository.com/");
     }
     
-    // @Test(dataProvider = DataProviderLibrary.DP_GENERIC, dataProviderClass = DataProviderLibrary.class)
+     @Test(dataProvider = DataProviderLibrary.DP_GENERIC, dataProviderClass = DataProviderLibrary.class)
     public void verifyToolsQA_MultipleData(BrowserTypes type) {
        DriverFactory.registerInstance(type.getDriverInstance());
        WebDriver driver = DriverFactory.getDriverInstance();
        driver.get("https://mvnrepository.com/");
     }
     
-    //@Test(dataProvider = DataProviderLibrary.VERIFY_TABLE_DATA, dataProviderClass = DataProviderLibrary.class)
+    @Test(dataProvider = DataProviderLibrary.VERIFY_TABLE_DATA, dataProviderClass = DataProviderLibrary.class)
     public void verifyToolsQA(BrowserTypes type,String a, String b) {
         DriverFactory.registerInstance(type.getDriverInstance());
        WebDriver driver = DriverFactory.getDriverInstance();
