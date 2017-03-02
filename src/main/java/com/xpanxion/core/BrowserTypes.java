@@ -1,6 +1,7 @@
 package com.xpanxion.core;
 
 import java.net.URL;
+import javax.swing.JOptionPane;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
@@ -42,17 +43,17 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     }, FIREFOX {
         @Override
         public WebDriver getDriverInstance() {
-            String firefoxPath = "C:\\TestDrivers\\geckodriver.exe";
-            System.setProperty("webdriver.gecko.driver", firefoxPath);
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            capabilities.setCapability("marionette", true);
+//            String firefoxPath = "C:\\TestDrivers\\geckodriver.exe";
+//            System.setProperty("webdriver.gecko.driver", firefoxPath);
+//            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//            capabilities.setCapability("marionette", true);
             WebDriver driver = null;
 
             if (Configuration.getInstance().isRemote()) {
-                driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
+//                driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'Firefox'", true);
             } else {
-            	driver = new FirefoxDriver(capabilities);
+            	driver = new FirefoxDriver();
                 Reporter.log("Running test in browser 'FIREFOX'", true);
             }
 
