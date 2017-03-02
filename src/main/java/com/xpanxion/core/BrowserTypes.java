@@ -8,7 +8,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -50,9 +49,10 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             WebDriver driver = null;
 
             if (Configuration.getInstance().isRemote()) {
-//                driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
+                driver = launchGridDriver(null, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'Firefox'", true);
             } else {
+                JOptionPane.showInputDialog("FF");
             	driver = new FirefoxDriver();
                 Reporter.log("Running test in browser 'FIREFOX'", true);
             }
@@ -63,8 +63,12 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
     }, IE {
         @Override
         public WebDriver getDriverInstance() {
-            System.setProperty("webdriver.edge.driver", "C:\\TestDrivers\\MicrosoftWebDriver.exe");
-            WebDriver driver = new EdgeDriver();
+            WebDriver driver = null;
+//            System.setProperty("webdriver.edge.driver", "C:\\TestDrivers\\MicrosoftWebDriver.exe");
+//            WebDriver driver = new EdgeDriver();
+            System.setProperty("webdriver.ie.driver", "C:/TestDrivers/IEDriverServer.exe");
+            driver = new InternetExplorerDriver();
+            driver.manage().window().maximize();
             return driver;
         }
 
@@ -80,5 +84,4 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
         }
     }
 
-    
 }
