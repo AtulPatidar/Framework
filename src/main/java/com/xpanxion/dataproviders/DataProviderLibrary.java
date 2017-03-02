@@ -3,15 +3,24 @@ package com.xpanxion.dataproviders;
 import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.Configuration;
 import com.xpanxion.core.MobileTypes;
+import javax.swing.JOptionPane;
 import org.testng.annotations.DataProvider;
 
 public class DataProviderLibrary {
 
-	public static final String DP_GENERIC="DP_GENERIC";
-	public static final String DP_GENERIC_MOBILE_BROWSERS="GENERIC_MOBILE";
-	public static final String DP_SAMPLE_DATA="SAMPLEDATA";
-	public static final String DP_GENERIC_MOBILE_NATIVE="MOBILE_NATIVE";
-	
+    public static final String DP_GENERIC = "DP_GENERIC";
+    public static final String DP_GENERIC_MOBILE_BROWSERS = "GENERIC_MOBILE";
+    public static final String DP_SAMPLE_DATA = "SAMPLEDATA";
+    public static final String DP_GENERIC_MOBILE_NATIVE = "MOBILE_NATIVE";
+    public static final String VERIFY_TABLE_DATA = "VERIFY_TABLE_DATA";
+    public static final String SAMPLE_DATA_FILE = "SampleDataFile.xlsx";
+
+    @DataProvider(name = VERIFY_TABLE_DATA)
+    public static Object[][] verifyTable() {
+        return injectBrowserInstancesToDataProviders(DataProviderBase.getDataByFileName(SAMPLE_DATA_FILE,
+                VERIFY_TABLE_DATA));
+    }
+
     @DataProvider(name = DP_GENERIC, parallel = true)
     public static Object[][] getBrowsersForWeb() {
         return injectBrowserInstancesToDataProviders(null);
@@ -21,7 +30,7 @@ public class DataProviderLibrary {
     public static Object[][] getBrowsersForMobile() {
         return injectMobileInstancesToDataProviders(null);
     }
-    
+
     @DataProvider(name = DP_GENERIC_MOBILE_NATIVE, parallel = true)
     public static Object[][] getNativePlatform() {
         return injectMobileInstancesToDataProviders(null);

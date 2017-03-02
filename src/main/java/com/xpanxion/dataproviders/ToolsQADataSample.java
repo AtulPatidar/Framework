@@ -11,14 +11,14 @@ import org.testng.annotations.DataProvider;
  *
  * @author AE08464
  */
-public class SampleDataProvider {
+public class ToolsQADataSample {
     public static final String VERIFY_TABLE_DATA = "VERIFY_TABLE_DATA";
     public static final String SAMPLE_DATA_FILE = "SampleDataFile.xlsx";
     
-    @DataProvider(name = VERIFY_TABLE_DATA)
-	public static String[][] verifyTable() {
-		return DataProviderBase.getDataByFileName(SAMPLE_DATA_FILE, 
-				VERIFY_TABLE_DATA);
-	}
+//    @DataProvider(name = VERIFY_TABLE_DATA)
+//	public static Object[][] verifyTable() {
+//		return injectBrowserInstancesToDataProviders(DataProviderBase.getDataByFileName(SAMPLE_DATA_FILE, 
+//				VERIFY_TABLE_DATA));
+//	}
     
 }

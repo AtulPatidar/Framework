@@ -8,6 +8,7 @@ import java.util.Properties;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xpanxion.exceptions.InvalidPropertyException;
+import javax.swing.JOptionPane;
 
 public class Configuration {
 

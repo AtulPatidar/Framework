@@ -15,17 +15,17 @@ public class FirefoxWebDriver extends WebDriverFactory{
 	public WebDriver getDriver() {
 		// TODO Auto-generated method stub
 		
-		String firefoxPath = System.getProperty("user.dir") + "/src/main/resources/geckodriver.exe";
-		System.setProperty("webdriver.gecko.driver", firefoxPath);
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-		capabilities.setCapability("marionette", true);
+//		String firefoxPath = System.getProperty("user.dir") + "/src/main/resources/geckodriver.exe";
+//		System.setProperty("webdriver.gecko.driver", firefoxPath);
+//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//		capabilities.setCapability("marionette", true);
 		//driver = new FirefoxDriver(capabilities);
 
         if (isRemote) {
-            driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
+//            driver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
             Reporter.log("Running test on Grid, in browser 'Firefox'", true);
         } else {
-            driver = new FirefoxDriver(capabilities);
+            driver = new FirefoxDriver();
             Reporter.log("Running test in browser 'FIREFOX'", true);
         }
 		

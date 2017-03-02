@@ -15,7 +15,6 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class CoreTestCase {
-
     private final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 
     @BeforeMethod
