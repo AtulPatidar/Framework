@@ -15,6 +15,7 @@ import com.xpanxion.datadriver.ExcelContext;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class DataProviderBase {
 
@@ -36,6 +37,7 @@ public class DataProviderBase {
         context.setSheetName(sheetName);
         Excel excelObj = new Excel(context);
         String[][] testData = excelObj.getData();
+        JOptionPane.showInputDialog(testData);
         return testData;
 
     }

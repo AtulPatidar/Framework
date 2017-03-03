@@ -21,7 +21,7 @@
         <jacksonVersion>2.7.1</jacksonVersion>
         <selenium.multibrowser>false</selenium.multibrowser>
         <xpanxion.testtype>WEB</xpanxion.testtype>
-        <execution.file>ssrc/test/resources/web_tests.xml</execution.file>
+        <execution.file>src/test/resources/web_tests.xml</execution.file>
     </properties>
 
     <dependencies>

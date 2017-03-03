@@ -26,7 +26,6 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 
 			DesiredCapabilities capabilities = getCapability();
 
-			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
@@ -47,7 +46,6 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		public AppiumDriver<WebElement> getDriverInstance() {
 			DesiredCapabilities capabilities = getCapability();
 
-			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
@@ -67,7 +65,6 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		public AppiumDriver<WebElement> getDriverInstance() {
 			DesiredCapabilities capabilities = getCapability();
 
-			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "IOS");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
@@ -87,7 +84,6 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		public AppiumDriver<WebElement> getDriverInstance() {
 			DesiredCapabilities capabilities = getCapability();
 
-			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "IOS");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
@@ -107,12 +103,7 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 	final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 
 	private static DesiredCapabilities getCapability() {
-		Configuration config = Configuration.getInstance();
 		DesiredCapabilities capabilities = Configuration.getInstance().getCapabilities();
-		String appPath = config.getAppPath();
-		if (appPath != null) {
-			capabilities.setCapability(MobileCapabilityType.APP, appPath);
-		}
 		return capabilities;
 	}
 

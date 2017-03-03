@@ -9,6 +9,7 @@ import com.xpanxion.base.DriverFactory;
 import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.dataproviders.DataProviderLibrary;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -35,6 +36,7 @@ public class SampleToolsQATest extends CoreTestCase {
         WebDriver driver = DriverFactory.getDriverInstance();
         System.out.println(a);
         driver.get("https://mvnrepository.com/");
+        driver.findElement(By.id("abcd_efcdkfsjfkasdfjads")).click();
     }
 
 }
