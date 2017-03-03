@@ -8,7 +8,6 @@ import java.util.Properties;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import com.xpanxion.exceptions.InvalidPropertyException;
-import javax.swing.JOptionPane;
 
 public class Configuration {
 
@@ -243,5 +242,8 @@ public class Configuration {
 
     public String getTestType() {
         return get(PropKeys.TEST_TYPE);
+    }
+    public boolean isMobileNativeApp(){
+    	return (!getTestType().equalsIgnoreCase("web")) && !platforms.toLowerCase().contains("web");
     }
 }

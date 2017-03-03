@@ -6,14 +6,14 @@ import com.xpanxion.base.DriverFactory;
 import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.core.MobileTypes;
 import com.xpanxion.dataproviders.DataProviderLibrary;
-import com.xpanxion.pages.MobileHomeScreen;
+import com.xpanxion.pages.IOSHomeScreen;
 
-public class SampleMobileTestCase extends CoreTestCase {
+public class SampleAndroidTestCase extends CoreTestCase {
 
     @Test(dataProvider = DataProviderLibrary.DP_GENERIC_MOBILE_NATIVE, dataProviderClass = DataProviderLibrary.class)
     public void testAppLaunch(MobileTypes types) {
     	DriverFactory.registerInstance(types.getDriverInstance());
-    	MobileHomeScreen sample = new MobileHomeScreen();
+    	IOSHomeScreen sample = new IOSHomeScreen();
         try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -22,6 +22,10 @@ public class SampleMobileTestCase extends CoreTestCase {
 		}
         String loc = sample.getLocationName();
         System.out.println(loc);
+        sample.tapSearch();
+        sample.tapSearch();
+        sample.tapSettings();
+        sample.tapSettings();
     }
 
 }
