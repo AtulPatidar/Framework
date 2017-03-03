@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="XPert Automation Suite">
-    <listeners></listeners>
     <test name="XPert Automation Web Tests">
         <classes>
-            <!--<class>com.xpanxion.tests.DataTablesTest</class>-->
-            <!--<class>com.xpanxion.tests.SampleSeleniumSearchTest</class>-->
+            <class name="com.xpanxion.tests.DataTablesTest"/>
+            <class name="com.xpanxion.tests.SampleSeleniumSearchTest"/>
             <class name="com.xpanxion.tests.SampleToolsQATest"/>
         </classes>
     </test>

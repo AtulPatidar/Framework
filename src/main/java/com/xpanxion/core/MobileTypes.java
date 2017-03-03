@@ -15,22 +15,23 @@ import com.xpanxion.utils.AppiumServer;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 public enum MobileTypes implements DriverInstance<WebDriver> {
-	
+
 	ANDROID {
 		@Override
 		public AppiumDriver<WebElement> getDriverInstance() {
-			
+
 			DesiredCapabilities capabilities = getCapability();
-			
+
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
 				AppiumServer.startServer(getAppiumUrl().toString());
-				driver = new AndroidDriver<WebElement>(getAppiumUrl(),capabilities);
+				driver = new AndroidDriver<WebElement>(getAppiumUrl(), capabilities);
 			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
 				LOG.error("Failed to launch application, Please make sure appium server is up and running at: "
 						+ getAppiumUrl(), e);
@@ -44,15 +45,54 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 	ANDROID_WEB {
 		@Override
 		public AppiumDriver<WebElement> getDriverInstance() {
-			
 			DesiredCapabilities capabilities = getCapability();
-			
+
 			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "ANDROID");
 			AppiumDriver<WebElement> driver;
 			try {
 				LOG.info("Starting appium server...");
 				AppiumServer.startServer(getAppiumUrl().toString());
-				driver = new AndroidDriver<WebElement>(getAppiumUrl(),capabilities);
+				driver = new AndroidDriver<WebElement>(getAppiumUrl(), capabilities);
+			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
+				LOG.error("Failed to launch Android application, Please make sure appium server is up and running at: "
+						+ getAppiumUrl(), e);
+				e.printStackTrace();
+				throw e;
+			}
+			return driver;
+		}
+	},
+	IOS {
+		@Override
+		public AppiumDriver<WebElement> getDriverInstance() {
+			DesiredCapabilities capabilities = getCapability();
+
+			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "IOS");
+			AppiumDriver<WebElement> driver;
+			try {
+				LOG.info("Starting appium server...");
+				AppiumServer.startServer(getAppiumUrl().toString());
+				driver = new IOSDriver<WebElement>(getAppiumUrl(), capabilities);
+			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
+				LOG.error("Failed to launch iOS application, Please make sure appium server is up and running at: "
+						+ getAppiumUrl(), e);
+				e.printStackTrace();
+				throw e;
+			}
+			return driver;
+		}
+	},
+	IOS_WEB {
+		@Override
+		public AppiumDriver<WebElement> getDriverInstance() {
+			DesiredCapabilities capabilities = getCapability();
+
+			capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "IOS");
+			AppiumDriver<WebElement> driver;
+			try {
+				LOG.info("Starting appium server...");
+				AppiumServer.startServer(getAppiumUrl().toString());
+				driver = new IOSDriver<WebElement>(getAppiumUrl(), capabilities);
 			} catch (SessionNotCreatedException | UnreachableBrowserException e) {
 				LOG.error("Failed to launch application, Please make sure appium server is up and running at: "
 						+ getAppiumUrl(), e);
@@ -62,17 +102,10 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 			return driver;
 		}
 
-	},
-	IOS {
-		@Override
-		public WebDriver getDriverInstance() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	};
-	
-	
+	},;
+
 	final static Logger LOG = Logger.getLogger(CoreTestCase.class);
+
 	private static DesiredCapabilities getCapability() {
 		Configuration config = Configuration.getInstance();
 		DesiredCapabilities capabilities = Configuration.getInstance().getCapabilities();
@@ -82,15 +115,14 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 		}
 		return capabilities;
 	}
-	
-	private static URL getAppiumUrl(){
+
+	private static URL getAppiumUrl() {
 		String appiumhubUrl = Configuration.getInstance().getHubUrl();
-		try{
+		try {
 			return new URL(appiumhubUrl);
-		}
-		catch(MalformedURLException e){
-			LOG.error("Invalid appium hub URL: "+appiumhubUrl);
-			new InvalidHubUrlException("Invalid appium hub URL: "+appiumhubUrl);
+		} catch (MalformedURLException e) {
+			LOG.error("Invalid appium hub URL: " + appiumhubUrl);
+			new InvalidHubUrlException("Invalid appium hub URL: " + appiumhubUrl);
 		}
 		return null;
 	}

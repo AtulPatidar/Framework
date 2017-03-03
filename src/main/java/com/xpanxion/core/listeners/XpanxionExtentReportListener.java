@@ -25,7 +25,7 @@ import com.relevantcodes.extentreports.LogStatus;
  * 
  * This is the listener used for extent reporting
  */
-public class AnthemExtentReportListener implements IReporter {
+public class XpanxionExtentReportListener implements IReporter {
     private ExtentReports extent;
   
     @Override
@@ -74,7 +74,7 @@ public class AnthemExtentReportListener implements IReporter {
                 }
                 File file = new File("");
                 if(result.getStatus()==ITestResult.FAILURE){
-                		test.log(LogStatus.FAIL, "Click on the snapshot below to zoom it: " + test.addScreenCapture(file.getAbsolutePath() + "/target/surefire-reports/screenshots/" + result.getName() + ".png"));
+                		test.log(LogStatus.FAIL, "Click on the snapshot below to zoom it: " + test.addScreenCapture(file.getAbsolutePath() + "/target/surefire-reports/screenshots/" + result.getName() +"_"+result.getStartMillis()+ ".png"));
                 }
                 /*for (String group : result.getMethod().getGroups())
                     test.assignCategory(group);*/
