@@ -77,4 +77,8 @@ public class VendorInfo {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public List<String> getCuisinesServed() {
+        return cuisinesServed;
+    }
 }

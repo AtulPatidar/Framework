@@ -1,4 +1,4 @@
-package com.xpanxion.xperts.enums;
+package com.xpanxion.xpert.enums;
 
 public interface IDataInfo<T> {
 

@@ -28,7 +28,7 @@ public class FasoosTest extends CoreTestCase {
     public void verifySearchItem(String searchItem) {
         WebDriver driver = DriverFactory.getDriverInstance();
         driver.get("https://order.faasos.io/");
-        JOptionPane.showInputDialog(searchItem);
+        
     }
 
 }

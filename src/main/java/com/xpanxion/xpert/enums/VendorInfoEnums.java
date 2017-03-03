@@ -1,4 +1,4 @@
-package com.xpanxion.xperts.enums;
+package com.xpanxion.xpert.enums;
 
 import com.xpanxion.xpert.data.VendorInfo;
 import com.xpanxion.xpert.generators.StringRegex;
@@ -19,6 +19,7 @@ public enum VendorInfoEnums implements IDataInfo<VendorInfo> {
             vendor.setPhoneNumber(regex.stringFromRegex("[0-9]{10}"));
             String cuisine = "Thai,Mexican,South Indian";
             List<String> strings = Arrays.asList(cuisine.split(","));
+            vendor.getCuisinesServed().addAll(strings);
             return vendor;
         }
         

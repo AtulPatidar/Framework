@@ -7,8 +7,6 @@ package com.xpanxion.xpert.pages;
 
 import com.xpanxion.base.WebPageBase;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
 
 /**
@@ -78,7 +76,7 @@ public class VendorRegistrationPage extends WebPageBase {
     }
 
     public VendorRegistrationPage selectCusineServed(List<String> list) {
-        clickButton(waitForElement(buttonCusineServed));
+        getJavaScriptExecutor().executeScript("arguments[0].click()",waitForElement(buttonCusineServed));
         CusineOptionsPopUp cusineOptionsPopUp = new CusineOptionsPopUp();
         cusineOptionsPopUp.selectCusine(list);
         VendorRegistrationPage registrationPage = new VendorRegistrationPage();

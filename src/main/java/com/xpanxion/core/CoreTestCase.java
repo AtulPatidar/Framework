@@ -60,7 +60,7 @@ public class CoreTestCase {
                 ImageIO.write(screenshot.getImage(), "PNG", baos);
                 FileUtils.writeByteArrayToFile(fileScr, baos.toByteArray());
             }
-            DriverFactory.getDriverInstance().close();
+            DriverFactory.getDriverInstance().quit();
         }
     }
 
