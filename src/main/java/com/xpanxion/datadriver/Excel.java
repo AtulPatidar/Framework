@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -54,6 +55,7 @@ public class Excel {
 
 	private String[][] getExcelRecords(URL resource, String[] columnNames) {
 		List<String[]> neededRows = new ArrayList<>();
+                //JOptionPane.showInputDialog(resource);
 		XSSFWorkbook workbook = getWorkbook(resource);
 		XSSFSheet sheet = null;
 		if (getSheetName() == null || getSheetName().isEmpty()) {

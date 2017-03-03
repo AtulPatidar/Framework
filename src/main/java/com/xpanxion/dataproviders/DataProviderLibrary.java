@@ -11,13 +11,23 @@ public class DataProviderLibrary {
     public static final String DP_GENERIC_MOBILE_BROWSERS = "GENERIC_MOBILE";
     public static final String DP_SAMPLE_DATA = "SAMPLEDATA";
     public static final String DP_GENERIC_MOBILE_NATIVE = "MOBILE_NATIVE";
+
     public static final String VERIFY_TABLE_DATA = "VERIFY_TABLE_DATA";
     public static final String SAMPLE_DATA_FILE = "SampleDataFile.xlsx";
+
+    public static final String DP_SEARCHFOODITEM = "DP_SEARCHFOODITEM";
+    public static final String DP_SEARCHFOODITEM_FILE = "SearchFoodItemFile.xlsx"; //sheetName = Food_Item
 
     @DataProvider(name = VERIFY_TABLE_DATA)
     public static Object[][] verifyTable() {
         return injectBrowserInstancesToDataProviders(DataProviderBase.getDataByFileName(SAMPLE_DATA_FILE,
                 VERIFY_TABLE_DATA));
+    }
+
+    @DataProvider(name = DP_SEARCHFOODITEM)
+    public static Object[][] searchFoodItem() {
+        return injectBrowserInstancesToDataProviders(DataProviderBase.getDataByFileName(DP_SEARCHFOODITEM_FILE,
+                "Food_Item"));
     }
 
     @DataProvider(name = DP_GENERIC, parallel = true)
@@ -27,8 +37,8 @@ public class DataProviderLibrary {
 
     @DataProvider(name = DP_GENERIC_MOBILE_BROWSERS, parallel = false)
     public static Object[][] getBrowsersForMobile() {
-        
-    	return injectMobileInstancesToDataProviders(null);
+
+        return injectMobileInstancesToDataProviders(null);
     }
 
     @DataProvider(name = DP_GENERIC_MOBILE_NATIVE, parallel = false)
