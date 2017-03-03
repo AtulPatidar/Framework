@@ -29,7 +29,7 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             capabilities.setPlatform(Platform.ANY);
             WebDriver webDriver;
             if (Configuration.getInstance().isRemote()) {
-                webDriver = new RemoteWebDriver(capabilities);
+                webDriver = launchGridDriver(capabilities, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'CHROME' ", true);
             } else {
                 webDriver = new ChromeDriver(capabilities);
@@ -48,10 +48,10 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             WebDriver driver = null;
 
             if (Configuration.getInstance().isRemote()) {
-                driver = new RemoteWebDriver(capabilities);
+                driver = launchGridDriver(null, Configuration.getInstance().getHubUrl());
                 Reporter.log("Running test on Grid, in browser 'Firefox'", true);
             } else {
-            	driver = new FirefoxDriver();
+                driver = new FirefoxDriver();
                 Reporter.log("Running test in browser 'FIREFOX'", true);
             }
 
@@ -64,8 +64,15 @@ public enum BrowserTypes implements DriverInstance<WebDriver> {
             WebDriver driver = null;
 //            System.setProperty("webdriver.edge.driver", "C:\\TestDrivers\\MicrosoftWebDriver.exe");
 //            WebDriver driver = new EdgeDriver();
+            DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
             System.setProperty("webdriver.ie.driver", "C:/TestDrivers/IEDriverServer.exe");
-            driver = new InternetExplorerDriver();
+            if (Configuration.getInstance().isRemote()) {
+                driver = launchGridDriver(null, Configuration.getInstance().getHubUrl());
+                Reporter.log("Running test on Grid, in browser 'Internet Explorer'", true);
+            } else {
+                driver = new InternetExplorerDriver();
+                Reporter.log("Running test in browser 'Internet Explorer'", true);
+            }
             driver.manage().window().maximize();
             return driver;
         }
