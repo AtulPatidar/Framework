@@ -17,15 +17,15 @@ import org.openqa.selenium.By;
  */
 public class VendorRegistrationPage extends WebPageBase {
 
-    By inputName = By.cssSelector("vendor_name");
-    By inputRestaurantName = By.cssSelector("kitchen_name");
-    By inputAboutYourBusiness = By.cssSelector("description");
+    By inputName = By.id("vendor_name");
+    By inputRestaurantName = By.id("kitchen_name");
+    By inputAboutYourBusiness = By.id("description");
     By buttonCusineServed = By.cssSelector(".faasos-arrow-right.right");
-    By inputAddress = By.cssSelector("address");
-    By selectCity = By.cssSelector("city_id");
-    By inputPhoneNumber = By.cssSelector("phone_number");
-    By inputEmailID = By.cssSelector("email_id");
-    By inputComment = By.cssSelector("comments");
+    By inputAddress = By.id("address");
+    By selectCity = By.id("city_id");
+    By inputPhoneNumber = By.id("phone_number");
+    By inputEmailID = By.id("email_id");
+    By inputComment = By.id("comments");
     By buttonSubmit = By.id("vendorRegisterBtn");
 
     public VendorRegistrationPage enterName(String name) {
