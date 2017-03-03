@@ -6,12 +6,10 @@
 package com.xpanxion.tests;
 
 import com.xpanxion.base.DriverFactory;
-import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.dataproviders.DataProviderLibrary;
 import javax.swing.JOptionPane;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 /**

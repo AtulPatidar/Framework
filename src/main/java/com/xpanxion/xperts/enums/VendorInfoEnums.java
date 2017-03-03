@@ -2,6 +2,8 @@ package com.xpanxion.xperts.enums;
 
 import com.xpanxion.xpert.data.VendorInfo;
 import com.xpanxion.xpert.generators.StringRegex;
+import java.util.Arrays;
+import java.util.List;
 
 public enum VendorInfoEnums implements IDataInfo<VendorInfo> {
     VALID_VENDOR_INFO {
@@ -15,8 +17,10 @@ public enum VendorInfoEnums implements IDataInfo<VendorInfo> {
             vendor.setComment(regex.stringFromRegex("[A-Za-z]{6}"));
             vendor.setEmail(regex.stringFromRegex("[a-z]{10}@[a-z]{5}.com"));
             vendor.setPhoneNumber(regex.stringFromRegex("[0-9]{10}"));
+            String cuisine = "Thai,Mexican,South Indian";
+            List<String> strings = Arrays.asList(cuisine.split(","));
             return vendor;
         }
-
+        
     }
 }
