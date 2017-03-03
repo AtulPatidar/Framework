@@ -11,4 +11,6 @@ public class FasoosApplicationTests {
         
         functions.fillOutTheVendorInformation(this, vendor);
     }
+    
+    
 }

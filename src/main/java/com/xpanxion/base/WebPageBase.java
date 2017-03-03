@@ -292,4 +292,17 @@ public class WebPageBase implements WebInterface {
         }
         return result;
     }
+
+    @Override
+    public void sendValuesToWebElement(WebElement element, String value) {
+        element.sendKeys(value);
+    }
+    
+    public boolean isDisabled(WebElement element) {
+        return element.getAttribute("disabled").equalsIgnoreCase("disabled");
+    }
+    
+    public boolean isEnabled(WebElement element) {
+        return element.getAttribute("enabled").equalsIgnoreCase("enabled");
+    }
 }
