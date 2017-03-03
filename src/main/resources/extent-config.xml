@@ -27,7 +27,10 @@
         <scripts>
             <![CDATA[
                 $(document).ready(function() {
-                    
+                              <!-- $('.test').click(function(){ alert('test clicked'); }); -->
+          $('.dashboard-view').click();
+          $('.suite-total-tests>.panel-name').text("End to End Automation Flows");
+          $('.suite-total-steps>.panel-name').text("Total Number Of Test Cases");
                 });
             ]]>
         </scripts>
