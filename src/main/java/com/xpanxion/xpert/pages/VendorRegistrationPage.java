@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xpanxion.pages;
+package com.xpanxion.xpert.pages;
 
 import com.xpanxion.base.WebPageBase;
 import org.openqa.selenium.By;
@@ -12,7 +12,7 @@ import org.openqa.selenium.By;
  *
  * @author xpanxion
  */
-public class FSVenderRegisterPage extends WebPageBase {
+public class VendorRegistrationPage extends WebPageBase {
 
     By inputName = By.cssSelector("vendor_name");
     By inputRestaurantName = By.cssSelector("kitchen_name");

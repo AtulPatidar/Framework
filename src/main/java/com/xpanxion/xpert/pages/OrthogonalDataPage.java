@@ -1,4 +1,4 @@
-package com.xpanxion.pages;
+package com.xpanxion.xpert.pages;
 
 import java.util.List;
 

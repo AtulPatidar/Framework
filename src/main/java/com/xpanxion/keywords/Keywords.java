@@ -1,7 +1,7 @@
 package com.xpanxion.keywords;
 
 import com.xpanxion.data.Employee;
-import com.xpanxion.pages.OrthogonalDataPage;
+import com.xpanxion.xpert.pages.OrthogonalDataPage;
 import java.util.List;
 
 public interface Keywords {

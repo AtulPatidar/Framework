@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xpanxion.pages;
+package com.xpanxion.xpert.pages;
 
 import com.xpanxion.base.WebPageBase;
 import org.openqa.selenium.By;
@@ -12,12 +12,13 @@ import org.openqa.selenium.By;
  *
  * @author xpanxion
  */
-public class FSHomePage extends WebPageBase{
+public class HomePage extends WebPageBase{
      
     By linkPartnerWithUs = By.cssSelector("a[href*='register']");
     
-    public void gotoPartnerWithUsPage() {
+    public VendorRegistrationPage gotoPartnerWithUsPage() {
         clickButton(waitForElement(linkPartnerWithUs));
+        return new VendorRegistrationPage();
         
     }
     

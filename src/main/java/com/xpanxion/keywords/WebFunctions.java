@@ -6,7 +6,7 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 
 import com.xpanxion.data.Employee;
-import com.xpanxion.pages.OrthogonalDataPage;
+import com.xpanxion.xpert.pages.OrthogonalDataPage;
 
 public class WebFunctions implements Keywords{
 

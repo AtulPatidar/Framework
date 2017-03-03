@@ -4,7 +4,7 @@ import com.xpanxion.base.DriverFactory;
 import com.xpanxion.core.BrowserTypes;
 import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.keywords.WebFunctions;
-import com.xpanxion.pages.OrthogonalDataPage;
+import com.xpanxion.xpert.pages.OrthogonalDataPage;
 import com.xpanxion.data.Employee;
 import com.xpanxion.dataproviders.DataProviderLibrary;
 import java.util.Collections;
