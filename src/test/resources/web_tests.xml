@@ -3,10 +3,7 @@
 <suite name="XPert Automation Suite">
     <test name="XPert Automation Web Tests">
         <classes>
-            <!--<class name="com.xpanxion.tests.DataTablesTest"/>-->
-            <!--<class name="com.xpanxion.tests.SampleSeleniumSearchTest"/>-->
-            <!--<class name="com.xpanxion.tests.SampleToolsQATest"/>-->
-            <class name="com.xpanxion.tests.FasoosTest"/>
+            <class name="com.xpanxion.tests.FasoosApplicationTests"/>
         </classes>
     </test>
 </suite>
