@@ -107,12 +107,7 @@ public enum MobileTypes implements DriverInstance<WebDriver> {
 	final static Logger LOG = Logger.getLogger(CoreTestCase.class);
 
 	private static DesiredCapabilities getCapability() {
-		Configuration config = Configuration.getInstance();
 		DesiredCapabilities capabilities = Configuration.getInstance().getCapabilities();
-		String appPath = config.getAppPath();
-		if (appPath != null) {
-			capabilities.setCapability(MobileCapabilityType.APP, appPath);
-		}
 		return capabilities;
 	}
 
