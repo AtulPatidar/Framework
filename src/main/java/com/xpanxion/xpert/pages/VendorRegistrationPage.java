@@ -24,8 +24,4 @@ public class VendorRegistrationPage extends WebPageBase {
     By inputEmailID = By.cssSelector("email_id");
     By inputComment = By.cssSelector("comments");
     
-    public void fillVendorRegistrationForm() {
-        
-    }
-    
 }
