@@ -6,4 +6,4 @@ nbactions.xml
 .settings/*
 *log4j-application.log
 test-output/*
-
+src/main/resources/defaults.properties
