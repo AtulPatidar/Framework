@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 
 import com.xpanxion.base.DriverFactory;
 
-import mx4j.log.Log;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 

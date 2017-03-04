@@ -1,8 +1,6 @@
 package com.xpanxion.xrest.core;
 
-import com.xpanxion.xrest.utils.XProperties;
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 

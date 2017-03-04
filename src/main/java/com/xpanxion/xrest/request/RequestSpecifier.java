@@ -4,7 +4,8 @@ import com.jayway.restassured.specification.RequestSpecification;
 
 public class RequestSpecifier{
 
-    private final RequestSpecification requestSpec;
+    @SuppressWarnings("unused")
+	private final RequestSpecification requestSpec;
 
 
     public RequestSpecifier(RequestSpecification requestSpec) {

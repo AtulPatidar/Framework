@@ -1,7 +1,6 @@
 package com.xpanxion.utils;
 
 
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Folder;
@@ -11,9 +10,6 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  * Send an email

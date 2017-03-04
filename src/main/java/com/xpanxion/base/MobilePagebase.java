@@ -2,8 +2,6 @@ package com.xpanxion.base;
 
 import java.util.NoSuchElementException;
 
-import javax.swing.JOptionPane;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 

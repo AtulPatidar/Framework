@@ -5,12 +5,12 @@
  */
 package com.xpanxion.tests;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.Test;
+
 import com.xpanxion.base.DriverFactory;
 import com.xpanxion.core.CoreTestCase;
 import com.xpanxion.dataproviders.DataProviderLibrary;
-import javax.swing.JOptionPane;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.Test;
 
 /**
  *

@@ -1,9 +1,9 @@
 package com.xpanxion.xrest.request;
 
-import com.xpanxion.xrest.media.BasicMediaTypes;
 import com.jayway.restassured.internal.mapping.ObjectMapperDeserializationContextImpl;
 import com.jayway.restassured.internal.mapping.ObjectMapperSerializationContextImpl;
 import com.jayway.restassured.mapper.DataToDeserialize;
+import com.xpanxion.xrest.media.BasicMediaTypes;
 
 
 public class RequestProcessor {
@@ -25,7 +25,8 @@ public class RequestProcessor {
         return this.mapper.serialize(omsc).toString();
     }
 
-    public <T> T deserialize(final Class<T> clazz, final String text) {
+    @SuppressWarnings("unchecked")
+	public <T> T deserialize(final Class<T> clazz, final String text) {
         DataToDeserialize dtd = new Deserializer(text);
 
         ObjectMapperDeserializationContextImpl omdc = new ObjectMapperDeserializationContextImpl();

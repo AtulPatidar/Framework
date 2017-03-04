@@ -81,7 +81,7 @@ public class XObjectMapper implements ObjectMapper {
                 return jsonSerializer.writeValueAsString(omsc.getObjectToSerialize());
             } catch (JsonProcessingException ex) {
                 throw new RuntimeException("Error writing " + omsc.getObjectToSerialize().getClass().getCanonicalName() + " as JSON. Reason: " + ex.getMessage(), ex);
-            } catch (IOException ex) {
+            } catch (Throwable ex) {
                 throw new RuntimeException("Error writing " + omsc.getObjectToSerialize().getClass().getCanonicalName() + " as JSON. Reason: " + ex.getMessage(), ex);
             }
         } else if (omsc.getContentType().contains("xml")) {

@@ -1,7 +1,6 @@
 package com.xpanxion.xrest.authenticators;
 
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Headers;
 import com.jayway.restassured.specification.RequestSpecification;
 
 public class PreemptiveBasicAuthenticationStrategy implements IAuthenticationStrategy {

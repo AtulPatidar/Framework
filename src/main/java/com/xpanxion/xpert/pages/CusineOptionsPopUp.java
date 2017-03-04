@@ -5,10 +5,11 @@
  */
 package com.xpanxion.xpert.pages;
 
-import com.xpanxion.base.WebPageBase;
 import java.util.List;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+
+import com.xpanxion.base.WebPageBase;
 
 public class CusineOptionsPopUp extends WebPageBase {
 
