@@ -175,6 +175,7 @@ public class Configuration {
         String APPIUM_LOG_LEVEL = "appium.log.level";
         String MULTI_BROWSER = "selenium.multibrowser";
         String TEST_TYPE = "xpanxion.testtype";
+		String GROWL_ENABLED = "xpanxion.growl.enabled";
 
     }
 
@@ -245,5 +246,8 @@ public class Configuration {
     }
     public boolean isMobileNativeApp(){
     	return (!getTestType().equalsIgnoreCase("web")) && !platforms.toLowerCase().contains("web");
+    }
+    public boolean isGrowlEnabled(){
+    	return Boolean.parseBoolean(get(PropKeys.GROWL_ENABLED));
     }
 }

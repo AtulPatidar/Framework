@@ -19,6 +19,7 @@ import org.testng.annotations.BeforeMethod;
 
 import com.xpanxion.base.DriverFactory;
 
+import mx4j.log.Log;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 
@@ -30,21 +31,24 @@ public class CoreTestCase {
 	public void setup(Object[] testArgs) {
 		Configuration config = new Configuration();
 		if (testArgs != null && testArgs.length > 0 && BrowserTypes.class.isAssignableFrom(testArgs[0].getClass())) {
+			log().debug("Starting Browser Instance - "+(BrowserTypes) testArgs[0]);
 			DriverFactory.registerInstance(((BrowserTypes) testArgs[0]).getDriverInstance());
 		} else {
 			if (config.getTestType().equalsIgnoreCase(TestTypes.WEB.name())) {
 				if (!config.getBrowsers().contains(",")) {
 					if (config.getBrowsers().equalsIgnoreCase("ALL")) {
+						log().debug("Starting Browser Instance - "+BrowserTypes.values()[0]);
 						DriverFactory.registerInstance(BrowserTypes.values()[0].getDriverInstance());
 					} else {
+						log().debug("Starting Browser Instance - "+config.getBrowsers());
 						DriverFactory.registerInstance(BrowserTypes.valueOf(config.getBrowsers()).getDriverInstance());
 					}
 				} else {
+					log().debug("Starting Browser Instance - "+ config.getBrowsers().split(",")[0]);
 					DriverFactory.registerInstance(
 							BrowserTypes.valueOf(config.getBrowsers().split(",")[0]).getDriverInstance());
 				}
 			}
-			// String browser = System.getProperty("selenium.browser");
 		}
 	}
 
@@ -52,13 +56,18 @@ public class CoreTestCase {
 	public void tearDown(ITestResult itr) throws IOException, URISyntaxException {
 		try {
 			if (DriverFactory.getDriverInstance() == null) {
+				
 			} else {
 				if (itr.isSuccess()) {
+					log().info("Test Case: "+itr.getMethod().getMethodName()+" - PASSED");
 				} else {
-					if (!new Configuration().isMobileNativeApp()) {
+					log().info("Test Case: "+itr.getMethod().getMethodName()+" - FAILED");
+					Configuration config = new Configuration();
+					if (!config.isMobileNativeApp() && config.isGrowlEnabled()) {
 						growlNotify(DriverFactory.getDriverInstance(), (Throwable) itr.getThrowable(),
 								itr.getMethod().getMethodName());
 					}
+					log().debug("Capturing Screenshot...");
 					Screenshot screenshot = new AShot().takeScreenshot(DriverFactory.getDriverInstance());
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
 					File file = new File(System.getProperty("user.dir") + "");
@@ -66,10 +75,13 @@ public class CoreTestCase {
 							+ itr.getMethod().getMethodName() + "_" + itr.getStartMillis() + ".png");
 					ImageIO.write(screenshot.getImage(), "PNG", baos);
 					FileUtils.writeByteArrayToFile(fileScr, baos.toByteArray());
+					log().debug("Screenshot saved at: "+fileScr.getAbsolutePath());
 				}
+				log().debug("Closing browser / session... ");
 				DriverFactory.getDriverInstance().quit();
 			}
 		} catch (Throwable e) {
+			log().error("Error in @AfterMethod, Error message: "+e.getLocalizedMessage());
 			e.printStackTrace(System.err);
 		}
 	}
@@ -106,6 +118,7 @@ public class CoreTestCase {
 	}
 
 	private void handledSleep(int sleepInSeconds) {
+		log().debug("Waiting for: "+sleepInSeconds+" seconds");
 		Calendar cal = Calendar.getInstance();
 		Calendar cal1 = Calendar.getInstance();
 		cal1.add(Calendar.SECOND, sleepInSeconds);

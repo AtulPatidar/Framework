@@ -22,6 +22,7 @@
         <selenium.multibrowser>false</selenium.multibrowser>
         <xpanxion.testtype>WEB</xpanxion.testtype>
         <execution.file>src/test/resources/web_tests.xml</execution.file>
+        <xpanxion.growl.enabled>true</xpanxion.growl.enabled>
     </properties>
 
     <dependencies>
