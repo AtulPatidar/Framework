@@ -30,20 +30,20 @@ public class CoreTestCase {
 	public void setup(Object[] testArgs) {
 		Configuration config = new Configuration();
 		if (testArgs != null && testArgs.length > 0 && BrowserTypes.class.isAssignableFrom(testArgs[0].getClass())) {
-			log().debug("Starting Browser Instance - "+(BrowserTypes) testArgs[0]);
+			log().debug("Starting Browser Instance - " + (BrowserTypes) testArgs[0]);
 			DriverFactory.registerInstance(((BrowserTypes) testArgs[0]).getDriverInstance());
 		} else {
 			if (config.getTestType().equalsIgnoreCase(TestTypes.WEB.name())) {
 				if (!config.getBrowsers().contains(",")) {
 					if (config.getBrowsers().equalsIgnoreCase("ALL")) {
-						log().debug("Starting Browser Instance - "+BrowserTypes.values()[0]);
+						log().debug("Starting Browser Instance - " + BrowserTypes.values()[0]);
 						DriverFactory.registerInstance(BrowserTypes.values()[0].getDriverInstance());
 					} else {
-						log().debug("Starting Browser Instance - "+config.getBrowsers());
+						log().debug("Starting Browser Instance - " + config.getBrowsers());
 						DriverFactory.registerInstance(BrowserTypes.valueOf(config.getBrowsers()).getDriverInstance());
 					}
 				} else {
-					log().debug("Starting Browser Instance - "+ config.getBrowsers().split(",")[0]);
+					log().debug("Starting Browser Instance - " + config.getBrowsers().split(",")[0]);
 					DriverFactory.registerInstance(
 							BrowserTypes.valueOf(config.getBrowsers().split(",")[0]).getDriverInstance());
 				}
@@ -53,14 +53,17 @@ public class CoreTestCase {
 
 	@AfterMethod
 	public void tearDown(ITestResult itr) throws IOException, URISyntaxException {
-		try {
-			if (DriverFactory.getDriverInstance() == null) {
-				
+
+		if (DriverFactory.getDriverInstance() == null) {
+
+		} else {
+
+			if (itr.isSuccess()) {
+				log().info("Test Case: " + itr.getMethod().getMethodName() + " - PASSED");
 			} else {
-				if (itr.isSuccess()) {
-					log().info("Test Case: "+itr.getMethod().getMethodName()+" - PASSED");
-				} else {
-					log().info("Test Case: "+itr.getMethod().getMethodName()+" - FAILED");
+				try {
+
+					log().info("Test Case: " + itr.getMethod().getMethodName() + " - FAILED");
 					Configuration config = new Configuration();
 					if (!config.isMobileNativeApp() && config.isGrowlEnabled()) {
 						growlNotify(DriverFactory.getDriverInstance(), (Throwable) itr.getThrowable(),
@@ -74,15 +77,21 @@ public class CoreTestCase {
 							+ itr.getMethod().getMethodName() + "_" + itr.getStartMillis() + ".png");
 					ImageIO.write(screenshot.getImage(), "PNG", baos);
 					FileUtils.writeByteArrayToFile(fileScr, baos.toByteArray());
-					log().debug("Screenshot saved at: "+fileScr.getAbsolutePath());
+					log().debug("Screenshot saved at: " + fileScr.getAbsolutePath());
+				} catch (Throwable e) {
+					log().error("Error in @AfterMethod, Error message: " + e.getLocalizedMessage());
+					e.printStackTrace(System.err);
 				}
-				log().debug("Closing browser / session... ");
-				DriverFactory.getDriverInstance().quit();
+				try {
+					log().debug("Closing browser / session... ");
+					DriverFactory.getDriverInstance().quit();
+				} catch (Throwable e) {
+					log().error("Failed to close browser, ignoring error. " + e.getLocalizedMessage());
+					e.printStackTrace(System.err);
+				}
 			}
-		} catch (Throwable e) {
-			log().error("Error in @AfterMethod, Error message: "+e.getLocalizedMessage());
-			e.printStackTrace(System.err);
 		}
+
 	}
 
 	public static Logger log() {
@@ -117,7 +126,7 @@ public class CoreTestCase {
 	}
 
 	private void handledSleep(int sleepInSeconds) {
-		log().debug("Waiting for: "+sleepInSeconds+" seconds");
+		log().debug("Waiting for: " + sleepInSeconds + " seconds");
 		Calendar cal = Calendar.getInstance();
 		Calendar cal1 = Calendar.getInstance();
 		cal1.add(Calendar.SECOND, sleepInSeconds);
