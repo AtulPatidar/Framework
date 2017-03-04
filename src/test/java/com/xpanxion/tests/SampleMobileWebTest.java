@@ -1,6 +1,7 @@
 package com.xpanxion.tests;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.xpanxion.base.DriverFactory;
@@ -23,7 +24,7 @@ public class SampleMobileWebTest extends CoreTestCase {
 		}
        
         String url = driver.getCurrentUrl();
-        System.out.println("Page URL: "+ url);
+        Assert.assertEquals(url,"http://invalid_url.com","Failing Test case");
        
     }
 

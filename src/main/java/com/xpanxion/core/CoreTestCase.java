@@ -50,23 +50,27 @@ public class CoreTestCase {
 
 	@AfterMethod
 	public void tearDown(ITestResult itr) throws IOException, URISyntaxException {
-		if (DriverFactory.getDriverInstance() == null) {
-		} else {
-			if (itr.isSuccess()) {
+		try {
+			if (DriverFactory.getDriverInstance() == null) {
 			} else {
-				if(!new Configuration().isMobileNativeApp()){
-					growlNotify(DriverFactory.getDriverInstance(), (Exception) itr.getThrowable(),
-						itr.getMethod().getMethodName());
+				if (itr.isSuccess()) {
+				} else {
+					if (!new Configuration().isMobileNativeApp()) {
+						growlNotify(DriverFactory.getDriverInstance(), (Throwable) itr.getThrowable(),
+								itr.getMethod().getMethodName());
+					}
+					Screenshot screenshot = new AShot().takeScreenshot(DriverFactory.getDriverInstance());
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					File file = new File(System.getProperty("user.dir") + "");
+					File fileScr = new File(file.getAbsolutePath() + "/target/surefire-reports/screenshots/"
+							+ itr.getMethod().getMethodName() + "_" + itr.getStartMillis() + ".png");
+					ImageIO.write(screenshot.getImage(), "PNG", baos);
+					FileUtils.writeByteArrayToFile(fileScr, baos.toByteArray());
 				}
-				Screenshot screenshot = new AShot().takeScreenshot(DriverFactory.getDriverInstance());
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				File file = new File(System.getProperty("user.dir") + "");
-				File fileScr = new File(file.getAbsolutePath() + "/target/surefire-reports/screenshots/"
-						+ itr.getMethod().getMethodName() + "_" + itr.getStartMillis() + ".png");
-				ImageIO.write(screenshot.getImage(), "PNG", baos);
-				FileUtils.writeByteArrayToFile(fileScr, baos.toByteArray());
+				DriverFactory.getDriverInstance().quit();
 			}
-			DriverFactory.getDriverInstance().quit();
+		} catch (Throwable e) {
+			e.printStackTrace(System.err);
 		}
 	}
 
@@ -74,7 +78,7 @@ public class CoreTestCase {
 		return LOG;
 	}
 
-	public void growlNotify(WebDriver driver, Exception error, String testCaseName) {
+	public void growlNotify(WebDriver driver, Throwable error, String testCaseName) {
 
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
